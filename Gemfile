@@ -38,6 +38,7 @@ gem 'cancancan'
 gem 'interactive_editor'
 gem 'awesome_print'
 gem 'hirb'
+gem 'simple_form'
 
 
 # Use Capistrano for deployment
@@ -46,7 +47,7 @@ gem 'hirb'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
-  
+
   gem 'pry'
   gem 'pry-rails'
 end
