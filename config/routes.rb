@@ -6,4 +6,7 @@ Rails.application.routes.draw do
   end
 
   get '/' => 'home#index', as: :home
+
+  get '/auth/facebook', as: :sign_in_with_facebook
+  get '/auth/facebook/callbacks/' => 'callbacks#facebook'
 end
