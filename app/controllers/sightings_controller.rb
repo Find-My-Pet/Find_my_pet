@@ -5,7 +5,7 @@ class SightingsController < ApplicationController
   end
 
   def create
-    sighting_params = params.require(:sighting).permit([:type, :last_seen_at, :long, :lat, :date_time,:note, :image, :name, :contact])
+    sighting_params = params.require(:sighting).permit([:type, :last_seen_at, :date_time, :long, :lat, :note, :image, :name, :contact])
     @sighting=Sighting.new sighting_params
     # @sighting.pet =
     if @sighting.save
