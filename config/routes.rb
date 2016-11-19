@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   end
 
   get '/' => 'home#index', as: :home
+  resources :pets
 end
