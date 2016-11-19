@@ -1,0 +1,13 @@
+<h1>All Lost Pets</h1>
+
+<% @pets.each do |p|%>
+  <h3><%=link_to p.name, pet_path(p) %></h3>
+  <p><%=p.breed%></p>
+  <p><%=p.color%></p>
+  <section>
+    <% if p.image.present?%>
+      <%= image_tag p.image.url(:thumb), class: 'image-index'%>
+    <%end%>
+  </section>
+  <hr>
+<%end%>
