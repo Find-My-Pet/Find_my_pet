@@ -6,5 +6,7 @@ Rails.application.routes.draw do
   end
 
   get '/' => 'home#index', as: :home
-  resources :pets
+  resources :pets, shallow: true do
+    resources :messages, only: [:create, :destroy]
+  end
 end
