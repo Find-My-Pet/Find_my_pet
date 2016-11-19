@@ -5,4 +5,7 @@ class Pet < ApplicationRecord
   validates :color, presence: true
   validates :gender, presence: true
   validates :last_seen_at, presence: true
+
+  mount_uploader :image, ImageUploader
+
 end

@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   resources :sightings, only: [:new, :create]
 
   get '/' => 'home#index', as: :home
+  resources :pets
 end
