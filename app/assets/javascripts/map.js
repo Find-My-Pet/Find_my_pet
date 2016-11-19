@@ -32,8 +32,15 @@ function initMap() {
    zoom: 4,
    center: uluru
   });
+  
+  google.maps.event.addListener(map, 'click', function(event) {
+    closeAllInfoWindows();
+    addMarker(event.latLng, map);
+  });
+  
   return map;
 }
+
 var markers = [];
 var infoWindows = [];
 
@@ -78,10 +85,6 @@ var icons = {
 }
 
 
-google.maps.event.addListener(map, 'click', function(event) {
-  closeAllInfoWindows();
-  addMarker(event.latLng, map);
-});
 
 function addMarker(location, map, label) {
   var marker = new google.maps.Marker({
