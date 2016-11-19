@@ -5,6 +5,6 @@ class CallbacksController < ApplicationController
 
     user ||= User.create_from_oauth(twitter_data)
     session[:user_id] = user.id
-    redirect_to hom_path
+    redirect_to home_path
   end
 end

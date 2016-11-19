@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
     user = User.find_by_email params[:email].downcase
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to root_path, notice: 'Signed In'
+      redirect_to home_path, notice: 'Signed In'
     else
       flash.now[:alert] = 'Wrong credentials'
       render :new
