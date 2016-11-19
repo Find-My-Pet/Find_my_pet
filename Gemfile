@@ -27,7 +27,7 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
-gem 'bootstrap-sass', '~> 3.3.6'
+
 gem 'gmaps4rails'
 gem 'underscore'
 gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'
@@ -39,6 +39,12 @@ gem 'cancancan'
 gem 'interactive_editor'
 gem 'awesome_print'
 gem 'hirb'
+
+# Bootstrap
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootstrap-glyphicons'
+gem 'font-awesome-sass'
+gem 'font-awesome-rails'
 
 
 # Use Capistrano for deployment
