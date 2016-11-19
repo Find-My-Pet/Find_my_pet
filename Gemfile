@@ -39,6 +39,7 @@ gem 'cancancan'
 gem 'interactive_editor'
 gem 'awesome_print'
 gem 'hirb'
+gem 'simple_form'
 
 # Bootstrap
 gem 'bootstrap-sass', '~> 3.3.6'
