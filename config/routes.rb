@@ -5,4 +5,5 @@ Rails.application.routes.draw do
     delete :destroy, on: :collection
   end
 
+  get '/' => 'home#index', as: :home
 end
