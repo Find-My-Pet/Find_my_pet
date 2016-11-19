@@ -35,7 +35,6 @@ ActiveRecord::Schema.define(version: 20161119203103) do
     t.integer  "user_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
-    t.boolean  "found"
     t.float    "lat"
     t.float    "long"
     t.string   "pet_type"
