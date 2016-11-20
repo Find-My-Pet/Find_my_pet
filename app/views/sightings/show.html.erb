@@ -1,6 +1,10 @@
 <h1>Sighting</h1>
 
-<%= @sighting.image %>
+<section>
+<% if @sighting.image.present? %>
+      <%= image_tag @sighting.image.url, class: 'question-thumbnail' %>
+<% end %>
+</section>
 <%= @sighting.pet_type %>
 <%= @sighting.note %>
 
