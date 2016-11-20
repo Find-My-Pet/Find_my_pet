@@ -15,6 +15,9 @@ resources :pets, shallow: true do
   end
 
   get '/auth/facebook', as: :sign_in_with_facebook
-  get '/auth/facebook/callbacks/' => 'callbacks#facebook'
+  get '/auth/facebook/callback/' => 'callbacks#facebook'
+
+  get '/auth/twitter', as: :sign_in_with_twitter
+  get '/auth/twitter/callback/' => 'callbacks#twitter'
 
 end

@@ -1,1 +1,4 @@
 <h1>Home Page</h1>
+<% unless user_signed_in? %>%>
+    <%= button_to 'Sign In With Twitter', sign_in_with_twitter_path, method: :get %>
+<% end %>
