@@ -12,6 +12,7 @@
         <%= image_tag i.url(:large) , class: 'thumbnail'%>
       <%end%>
     <%end%>
+
   </section>
   <div class="col-md-8">
     <div class="panel-panel">
@@ -19,6 +20,7 @@
         <div class="col-md-8">
           <h2 style="margin-top:0"><%= @pet.name %></h2>
         </div>
+
 
         <div class="col-md-4 text-right">
           <%=link_to edit_pet_path(@pet), class:'btn btn-default' do%>
