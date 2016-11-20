@@ -1,10 +1,34 @@
-$navbar-default-bg: #02438f;
-$body-bg: #23649d;
-$text-color: #e0dddf;
-$light-orange: #ff8c00;
-$navbar-default-color: $light-orange;
-$navbar-inverse-link-active-bg: rgba(255, 255, 255, 0.02);
-$pink: #f64b77;
+// Colors
+// $gray-base: #babbbc;
+$brand-success: #0c3769;
+$brand-info: #30b5f1;
+$brand-warning:#c58c09;
+$brand-danger: #f93296;
 
-$btn-default-color:#92c9e1;
-$radius: 8px;
+// Scaffolding
+$body-bg: #fff;
+
+// Buttons
+$btn-default-color: #333;
+$btn-default-bg: #fff;
+$btn-default-border:#ccc;
+$btn-primary-color: #f93296;
+
+
+// Dropdowns
+$dropdown-bg:#c8c9c9;
+$dropdown-divider-bg: #c8def4;
+$dropdown-link-hover-bg: #f5f5f5;
+
+// Navbar
+$navbar-default-color: #f8f8f8;
+$navbar-default-bg: #0c3769;
+$navbar-default-link-color: #fff;
+$navbar-default-link-hover-color: #e9e9e9;
+$navbar-default-link-active-color: #777;
+
+// Popovers
+$popover-bg: #babbbc;
+
+// Modals
+$modal-content-bg: #babbbc;
