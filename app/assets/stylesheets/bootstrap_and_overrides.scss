@@ -3,3 +3,24 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "font-awesome";
+
+.panel-info {
+  .panel-heading {
+    background: white;
+    border: none;
+    color: $brand-info;
+
+    .social{
+      font-size: 20px;
+      a{
+        color: $brand-info;
+        margin: 0 10px;
+      }
+
+    }
+  }
+}
+
+body{
+  background: #bbbbbb
+}
