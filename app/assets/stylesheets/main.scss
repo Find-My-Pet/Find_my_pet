@@ -13,3 +13,30 @@
     @include box-shadow(2px, 2px, 5px, lighten($btn-default-color,30%)) ;
   }
 }
+
+.tbn {
+  img{
+    width: 100%;
+  }
+}
+
+table {
+  background-color: rgba(255, 255, 255, 0.33);
+}
+
+.panel-panel{
+  padding: 16px;
+  @include box-shadow(2px, 2px, 5px, lighten($btn-default-color,30%)) ;
+  background: rgba(lighten($btn-default-color, 70%), 0.6);
+  overflow: hidden;
+
+  span{
+
+  }
+}
+
+.hr{
+  border-bottom: solid 2px lighten($btn-default-color, 70%);
+  display:block;
+  margin: 10px 0 ;
+}
