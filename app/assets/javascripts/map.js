@@ -41,7 +41,7 @@ function initMap() {
 
   google.maps.event.addListener(map, 'click', function(event) {
     closeAllInfoWindows();
-    addMarker(event.latLng, map);  
+    addMarker(event.latLng, map);
     $('#pet_last_seen_at').val(event.latLng)
   });
 
