@@ -1,0 +1,4 @@
+$('#messages').prepend("<%= j render 'message', message: @message %>");
+
+<% @message = Message.new %>
+$('#message-form').html('<%= j render 'form' %>')
