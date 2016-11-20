@@ -18,6 +18,7 @@ class PetsController < ApplicationController
   end
 
   def show
+    @message = Message.new
   end
 
   def index
@@ -66,7 +67,8 @@ class PetsController < ApplicationController
                                  :long,
                                  :note,
                                  {image: []},
-                                 :date_time,
+                                 :last_seen_date,
+                                 :last_seen_time,
                                  :user_id])
   end
 

@@ -12,7 +12,7 @@
     <%=f.input :last_seen_at %>
     <div class="form-inline">
       <%=f.input :last_seen_date, as: :date, order: [:day, :month, :year] %>
-      <%=f.input :last_seen_time, as: :time %>
+      <%=f.input :last_seen_time, as: :time, only: [:hour, :minute] %>
     </div>
   </div>
   <div class="col-md-6">
