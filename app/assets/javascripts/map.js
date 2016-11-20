@@ -22,12 +22,11 @@ $( document ).ready(function() {
   map = initMap();
   map.mapTypes.set("map_style", styledMap);
   map.setMapTypeId("map_style");
-  addMarker({lat: -25.363, lng: 131.044}, map, "This is a test title");
-  addInfoWindow({lat: -25.363, lng: 140.044}, map, info, 'parking')
+  
+  var pets = getLostPets();
 });
 
 function initMap() {
-
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 49.28200018372185, lng: -123.10863018035889},
     zoom: 14,
@@ -163,8 +162,6 @@ var icons = {
   });
 }
 
-
-
 function addMarker(location, map, label) {
   var marker = new google.maps.Marker({
     position: location,
@@ -179,6 +176,15 @@ function addMarker(location, map, label) {
   }
 }
 
+function addLostPetsMarker(location, map, label) {
+  var marker = new google.maps.Marker({
+    position: location,
+    label: label,
+    map: map
+  });
+  markers.push(marker);
+}
+
 var removeLastMarker = function() {
 	for (var i = 0; i < markers.length - 1; i++) {
   	markers[i].setMap(null)
@@ -190,3 +196,42 @@ var closeAllInfoWindows = function() {
      infoWindows[i].close();
   }
 }
+
+var getLostPets = function(){
+  // Get all the lost pets and draw markers on the map
+  $.get('/api/v1/pets', (data) => {
+    for (var i=0; i < data.length; i++){
+      console.log(data[i]);
+      addLostPetsMarker({lat:data[i].lat, lng: data[i].lng}, map, data[i].name);
+    }
+  });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
