@@ -29,10 +29,10 @@ $( document ).ready(function() {
   // get sightings by pet id
   getSightingsOfaPet(4);
   
+ $('#filter_button').on('click', function(){
+  var pets = getPetsByType(globals.pets, "Dog", map);
   
-  $('#filter_button').on('click', function(){
-    filterPetsByType(globals.pets, "Dog");
-  });
+ });
 
 });
 
@@ -253,10 +253,17 @@ var getSightingsOfaPet = function(pet_id){
     error: function(xhr) {
       alert('No data');
     }
-  })f
+  });
 }
 
-
-var filterPetsByType = function(pets_data, pet_type){
-  console.log(pets_data[0].pet_type);
-};
+// Returns the pets with the category given
+// example:   
+//  $('#filter_button').on('click', function(){
+//   var pets = getPetsByType(globals.pets, "Dog");
+//  });
+function getPetsByType(pets_data, type, map) {
+  var pets = pets_data;
+  return pets.filter(
+      function(data){ return pets.pet_type == type }
+  );
+}
