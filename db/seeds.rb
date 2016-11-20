@@ -11,7 +11,7 @@ size = ['Small', 'Medium', 'Big']
 
 gender = ['Male', 'Female']
 
-5.times do |i|
+50.times do |i|
  Pet.create(name: Faker::Name.name,
            breed: Faker::Name.first_name,
            color: Faker::Color.color_name,
@@ -23,4 +23,14 @@ gender = ['Male', 'Female']
            long: rand(-180.000000000...180.000000000),
            pet_type: pet_type.sample,
            size: size.sample)
+end
+
+200.times do |i|
+ Sighting.create(name: Faker::Name.name,
+           last_seen_at: Faker::Address.city,
+           note: Faker::Lorem.paragraph,
+           lat: rand(-90.000000000...90.000000000),
+           long: rand(-180.000000000...180.000000000),
+           pet_id:(Random.rand(1..Pet.count))
+           )
 end

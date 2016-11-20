@@ -16,5 +16,12 @@ Rails.application.routes.draw do
       resources :pets, only:[:index, :show, :create, :new]
     end
   end
+  
+  namespace :api, defaults: {format: :json} do
+    namespace :v1 do
+      resources :sightings, only:[:index, :show, :create, :new]
+    end
+  end
+  
 
 end

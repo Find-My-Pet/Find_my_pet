@@ -23,7 +23,11 @@ $( document ).ready(function() {
   map.mapTypes.set("map_style", styledMap);
   map.setMapTypeId("map_style");
   
-  var pets = getLostPets();
+  // Get all the lost pets
+  getLostPets();
+  
+  // get sightings by pet id
+  getSightingsOfaPet(20);
 });
 
 function initMap() {
@@ -176,7 +180,18 @@ function addMarker(location, map, label) {
   }
 }
 
+// Add a marker on lost pet 
 function addLostPetsMarker(location, map, label) {
+  var marker = new google.maps.Marker({
+    position: location,
+    label: label,
+    map: map
+  });
+  markers.push(marker);
+}
+
+// Add a marker on sighting
+function addSightingsMarker(location, map, label) {
   var marker = new google.maps.Marker({
     position: location,
     label: label,
@@ -207,6 +222,23 @@ var getLostPets = function(){
   });
 }
 
+// Get all the sightings by pet id
+var getSightingsOfaPet = function(pet_id){
+  // Get all the lost pets and draw markers on the map
+  $.ajax({
+    url: "/api/v1/pets",
+    type: "get", //send it through get method
+    data:{id: pet_id},
+    success: function(data) {
+      for (var i=0; i < data.length; i++){
+        addSightingsMarker({lat:data[i].lat, lng: data[i].lng}, map, data[i].name);
+      }
+    },
+    error: function(xhr) {
+      alert('No data');
+    }
+  })
+}
 
 
 
