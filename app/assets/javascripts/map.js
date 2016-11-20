@@ -19,13 +19,14 @@ var mapstyle = [
 $( document ).ready(function() {
   var styledMap = new google.maps.StyledMapType(mapstyle, {name: "styled map"});
   var map; // define the global map
+
   map = initMap();
   map.mapTypes.set("map_style", styledMap);
   map.setMapTypeId("map_style");
-  
+
   // Get all the lost pets
   getLostPets();
-  
+
   // get sightings by pet id
   getSightingsOfaPet(20);
 });
@@ -180,7 +181,7 @@ function addMarker(location, map, label) {
   }
 }
 
-// Add a marker on lost pet 
+// Add a marker on lost pet
 function addLostPetsMarker(location, map, label) {
   var marker = new google.maps.Marker({
     position: location,
@@ -191,13 +192,20 @@ function addLostPetsMarker(location, map, label) {
 }
 
 // Add a marker on sighting
-function addSightingsMarker(location, map, label) {
-  var marker = new google.maps.Marker({
-    position: location,
-    label: label,
-    map: map
+function addSightingsMarker(data, map) {
+  var heatmapData = [];
+  for (var i=0; i < data.length; i++){
+    heatmapData.push({
+                location: new google.maps.LatLng(data[i].lat, data[i].lng),
+                weight: 20
+              });
+  }
+  var heatmap = new google.maps.visualization.HeatmapLayer({
+    data: heatmapData,
+    radius: 15
   });
-  markers.push(marker);
+  heatmap.setMap(map);
+
 }
 
 var removeLastMarker = function() {
@@ -216,7 +224,7 @@ var getLostPets = function(){
   // Get all the lost pets and draw markers on the map
   $.get('/api/v1/pets', (data) => {
     for (var i=0; i < data.length; i++){
-      console.log(data[i]);
+
       addLostPetsMarker({lat:data[i].lat, lng: data[i].lng}, map, data[i].name);
     }
   });
@@ -230,40 +238,10 @@ var getSightingsOfaPet = function(pet_id){
     type: "get", //send it through get method
     data:{id: pet_id},
     success: function(data) {
-      for (var i=0; i < data.length; i++){
-        addSightingsMarker({lat:data[i].lat, lng: data[i].lng}, map, data[i].name);
-      }
+      addSightingsMarker(data, map);
     },
     error: function(xhr) {
       alert('No data');
     }
   })
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
