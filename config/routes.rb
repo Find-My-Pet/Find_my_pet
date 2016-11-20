@@ -5,11 +5,16 @@ Rails.application.routes.draw do
     delete :destroy, on: :collection
   end
 
+resources :sightings
+
   get '/' => 'home#index', as: :home
-  resources :pets, shallow: true do
-    resources :messages, only: [:create, :destroy]
+
+resources :pets, shallow: true do
+  resources :sightings, only: [:create]
+  resources :messages, only: [:create, :destroy]
   end
 
   get '/auth/facebook', as: :sign_in_with_facebook
   get '/auth/facebook/callbacks/' => 'callbacks#facebook'
+
 end
