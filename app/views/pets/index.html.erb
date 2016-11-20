@@ -9,5 +9,8 @@
       <%= image_tag p.image.url(:thumb), class: 'image-index'%>
     <%end%>
   </section>
+  <%= link_to 'Did you see this pet?', pet_sightings_path(p)%>
   <hr>
 <%end%>
+
+<%= link_to 'Not one of those? Make a new spot!', sighting_path %>
