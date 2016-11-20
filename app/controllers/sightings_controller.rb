@@ -1,13 +1,10 @@
 class SightingsController < ApplicationController
 
-before_action :set_defaults, only: [:new, :edit]
+  before_action :set_defaults, only: [:new, :edit]
+  before_action :find_sighting, only: [:show, :edit, :update, :destroy]
 
   def index
     @sightings = Sighting.order(created_at: :desc)
-  end
-
-  def show
-
   end
 
   def new
@@ -15,7 +12,6 @@ before_action :set_defaults, only: [:new, :edit]
   end
 
   def create
-    sighting_params = params.require(:sighting).permit([:pet_type, :last_seen_at, :date_time, :long, :lat, :note, :image, :name, :contact, :pet_id])
     @sighting=Sighting.new sighting_params
     if params[:pet_id].present?
       @sighting.pet_id = params[:pet_id]
@@ -31,16 +27,12 @@ before_action :set_defaults, only: [:new, :edit]
   end
 
   def show
-    @sighting = Sighting.find params[:id]
   end
 
   def edit
-    @sighting = Sighting.find params[:id]
   end
 
   def update
-    @sighting = Sighting.find params[:id]
-    sighting_params = params.require(:sighting).permit([:pet_type, :last_seen_at, :date_time, :long, :lat, :note, :image, :name, :contact, :pet_id])
     if @sighting.update sighting_params
      redirect_to sighting_path(@sighting)
     else
@@ -54,13 +46,20 @@ before_action :set_defaults, only: [:new, :edit]
     redirect_to sightings_path
   end
 
-private
-def set_defaults
-  @pet_type = ['Dog', 'Cat', 'Bird', 'Guinea Pig', 'Hamster', 'Iguana', 'Snake', 'Other']
+  private
+  def set_defaults
+    @pet_type = ['Dog', 'Cat', 'Bird', 'Guinea Pig', 'Hamster', 'Iguana', 'Snake', 'Other']
 
-  @size = ['Small', 'Medium', 'Big']
+    @size = ['Small', 'Medium', 'Big']
 
-  @gender = ['Male', 'Female']
-end
+    @gender = ['Male', 'Female']
+  end
 
+  def find_sighting
+    @sighting = Sighting.find params[:id]
+  end
+
+  def sighting_params
+    params.require(:sighting).permit([:pet_type, :last_seen_at, :date_time, :long, :lat, :note, :image, :name, :contact, :pet_id])
+  end
 end
