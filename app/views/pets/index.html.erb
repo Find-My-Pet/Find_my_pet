@@ -5,12 +5,12 @@
   <p><%=p.breed%></p>
   <p><%=p.color%></p>
   <section>
-    <% if p.image.present?%>
-      <%= image_tag p.image.url(:thumb), class: 'image-index'%>
+    <% if p.image.present?%>  
+      <%= image_tag p.image[0].url(:thumb), class: 'image-index'%>
     <%end%>
   </section>
-  <%= link_to 'Did you see this pet?', pet_sightings_path(p)%>
+  <%= link_to 'Did you see this pet?', new_pet_sighting_path(p)%>
   <hr>
 <%end%>
 
-<%= link_to 'Not one of those? Make a new spot!', sighting_path %>
+<%= link_to 'Not one of those? Make a new spot!', new_sighting_path %>

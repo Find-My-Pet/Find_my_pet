@@ -7,6 +7,7 @@ class PetsController < ApplicationController
   end
 
   def create
+    # binding.pry
     @pet = Pet.new pet_params
     @pet.user = current_user
     if @pet.save
@@ -64,7 +65,7 @@ class PetsController < ApplicationController
                                  :lat,
                                  :long,
                                  :note,
-                                 :image,
+                                 {image: []},
                                  :date_time,
                                  :user_id])
   end

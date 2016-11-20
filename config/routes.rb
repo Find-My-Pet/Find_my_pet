@@ -10,7 +10,7 @@ resources :sightings
   get '/' => 'home#index', as: :home
 
 resources :pets, shallow: true do
-  resources :sightings, only: [:create]
+  resources :sightings, only: [:new]
   resources :messages, only: [:create, :destroy]
   end
 
