@@ -20,6 +20,7 @@ class PetsController < ApplicationController
   end
 
   def show
+    @message = Message.new
   end
 
   def index
@@ -41,6 +42,10 @@ class PetsController < ApplicationController
   def destroy
     @pet.destroy
     redirect_to pets_path
+  end
+
+  def print
+    render layout: "print"
   end
 
   private
@@ -66,9 +71,11 @@ class PetsController < ApplicationController
                                  :last_seen_at,
                                  :lat,
                                  :long,
+                                 :found,
                                  :note,
                                  {image: []},
-                                 :date_time,
+                                 :last_seen_date,
+                                 :last_seen_time,
                                  :user_id])
   end
 

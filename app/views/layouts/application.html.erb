@@ -16,8 +16,6 @@
 
   <body>
 
-
-
   <nav class="navbar navbar-default navbar-static-top">
 
     <div class="container">
@@ -38,12 +36,11 @@
         <ul class="nav navbar-nav navbar-right">
           <li><%= link_to 'Pets Spotted', sightings_path %></li>
           <li><%= link_to 'Report a Pet Sighting', new_sighting_path %></li>
-          <li><%= link_to 'Sign In', new_session_path %></li>
-          <li><%= link_to 'Sign Up', new_user_path, class: 'bnt btn-primary' %></li>
-        </ul>
-
-        <ul class="nav navbar-nav navbar-right">
-          <% if user_signed_in? %>
+          <li><%= link_to 'Missing Pet Reports', pets_path %></li>
+          <% unless user_signed_in? %>
+            <li> <a class="btn btn-primary" data-toggle="modal" data-target="#SignUp">Sign Up</a></li>
+            <li> <a class="btn btn-primary" data-toggle="modal" data-target="#SignIn">Sign In</a></li>
+          <% else %>
             <li>
               <p class="navbar-text">Hello <%= current_user.first_name %></p>
             </li>
@@ -65,7 +62,8 @@
 
     <%= yield %>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<%= render 'shared/sign_up' %>
+<%= render 'shared/sign_in' %>
+
   </body>
 </html>

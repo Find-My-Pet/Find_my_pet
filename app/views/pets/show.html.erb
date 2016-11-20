@@ -17,19 +17,42 @@
   <p><%= @pet.gender %></p>
   <p><%= @pet.age %></p>
   <p><%= @pet.last_seen_at %></p>
+  <p><%= @pet.last_seen_date.strftime('%b %d %Y') %>
+  <%= @pet.last_seen_time.strftime('%I:%M %p') %></p>
   <p><%= @pet.note %></p>
-  <%# if can? :manage, @pet %>
-    <%=link_to edit_pet_path(@pet) do%>
-      <span class="glyphicon glyphicon-pencil"></span>
-    <%end%>
-    <%=link_to pet_path(@pet), method: :delete do %>
-      <span class="glyphicon glyphicon-trash"></span>
-    <%end%>
-  <%#end%>
 
+  <div>
+    <p>Found Your pet?</p>
+    <p>
+        <% check_state = @pet.found ? 'checked' : 'unchecked' %>
+        <%= simple_form_for @pet do |f| %>
+            <%= f.input :found, as: :boolean, :input_html => { :checked => check_state } %>
+            <%= f.submit 'Confirm' %>
+        <% end %>
+    </p>
+  </div>
+  
+  <%# if can? :manage, @pet %>
+  <%=link_to edit_pet_path(@pet) do%>
+    <span class="glyphicon glyphicon-pencil"></span>
+  <%end%>
+  <%=link_to pet_path(@pet), method: :delete do %>
+    <span class="glyphicon glyphicon-trash"></span>
+  <%end%>
+  <%#end%>
 </div>
 
-<div>
-  <p>Found Your pet?</p>
-  <p><%#= @pet.found %></p>
+<br>
+
+<div class="row">
+  <div class="col-md-6">
+    <div id="message-form">
+      <%= render '/messages/form' %>
+    </div>
+    <div id="messages">
+      <% @pet.messages.each do |message| %>
+        <%= render('/messages/message', {message: message}) %>
+      <%end%>
+    </div>
+  </div>
 </div>
