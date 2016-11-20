@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20161119203103) do
     t.float    "long"
     t.string   "pet_type"
     t.string   "size"
+    t.boolean  "found"
     t.datetime "last_seen_date"
     t.datetime "last_seen_time"
     t.index ["user_id"], name: "index_pets_on_user_id", using: :btree
