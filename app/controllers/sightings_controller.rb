@@ -41,12 +41,12 @@ class SightingsController < ApplicationController
   end
 
   def destroy
-    @sighting = Sighting.find params[:id]
     @sighting.destroy
     redirect_to sightings_path
   end
 
   private
+
   def set_defaults
     @pet_type = ['Dog', 'Cat', 'Bird', 'Guinea Pig', 'Hamster', 'Iguana', 'Snake', 'Other']
 
