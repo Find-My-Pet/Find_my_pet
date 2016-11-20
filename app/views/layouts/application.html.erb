@@ -11,6 +11,49 @@
   </head>
 
   <body>
+
+  <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button
+              type="button"
+              class="navbar-toggle collapsed"
+              data-toggle="collapse"
+              data-target="#petfider-navbar">
+            <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+          </button>
+        </div>
+
+          <div class="navbar-collapse collapse" id="petfinder-navbar">
+            <ul class="nav navbar-nav">
+              <li><%= link_to 'Home', home_path %></li>
+              <li><%= link_to 'Sign In', new_session_path %></li>
+              <li><%= link_to 'Sign Up', new_user_path %></li>
+              <li><%= link_to 'Pets Spotted', sightings_path %></li>
+              <li><%= link_to 'Report a Pet Sighting', new_sighting_path %></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+              <% if user_signed_in? %>
+                <li>
+                  <p class="navbar-text">Hello <%= current_user.first_name %></p>
+                </li>
+                <li> <%= link_to 'Your Pet Page', pet_path(current_user.pets) %>
+                <li>
+                  <%= button_to 'Sign out',
+                    sessions_path,
+                    method: :delete,
+                    class: 'btn btn-default navbar-btn'
+                    %>
+                  </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+
+
     <%= yield %>
   </body>
 </html>
