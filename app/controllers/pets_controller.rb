@@ -42,6 +42,10 @@ class PetsController < ApplicationController
     redirect_to pets_path
   end
 
+  def print
+    render layout: "print"
+  end
+
   private
 
   def set_defaults
@@ -67,7 +71,8 @@ class PetsController < ApplicationController
                                  :long,
                                  :note,
                                  {image: []},
-                                 :date_time,
+                                 :last_seen_date,
+                                 :last_seen_time,
                                  :user_id])
   end
 
