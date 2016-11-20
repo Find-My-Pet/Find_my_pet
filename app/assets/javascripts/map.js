@@ -41,7 +41,8 @@ function initMap() {
 
   google.maps.event.addListener(map, 'click', function(event) {
     closeAllInfoWindows();
-    addMarker(event.latLng, map);
+    addMarker(event.latLng, map);  
+    $('#pet_last_seen_at').val(event.latLng)
   });
 
   var infoWindow = new google.maps.InfoWindow({map: map});
@@ -109,10 +110,11 @@ function initMap() {
               lat: position.coords.latitude,
               lng: position.coords.longitude
             };
-
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('Location found.');
+            // infoWindow.setPosition(pos);
+            // infoWindow.setContent('Location found.');
             map.setCenter(pos);
+            addMarker(pos, map);
+            $('#pet_last_seen_at').val(`(${pos.lat}, ${pos.lng})`)
           }, function() {
             handleLocationError(true, infoWindow, map.getCenter());
           });
