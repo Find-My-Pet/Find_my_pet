@@ -22,7 +22,12 @@
   <p><%= @pet.note %></p>
   <div>
     <p>Found Your pet?</p>
-    <p><%#= @pet.found %></p>
+    <p>
+        <%= simple_form_for @pet do |f| %>
+            <%= f.input :found, as: :boolean %>
+            <%= f.submit 'Confirm' %>
+        <% end %>
+    </p>
   </div>
 
   <%=link_to edit_pet_path(@pet) do%>
