@@ -5,4 +5,5 @@ json.array! @pets do |pet|
   json.lat pet.lat
   json.lng pet.long
   json.breed pet.breed
+  json.pet_type pet.pet_type
 end
