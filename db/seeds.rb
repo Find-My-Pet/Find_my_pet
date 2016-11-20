@@ -5,3 +5,22 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+pet_type = ['Dog', 'Cat', 'Bird', 'Guinea Pig', 'Hamster', 'Iguana', 'Snake', 'Other']
+
+size = ['Small', 'Medium', 'Big']
+
+gender = ['Male', 'Female']
+
+5.times do |i|
+ Pet.create(name: Faker::Name.name,
+           breed: Faker::Name.first_name,
+           color: Faker::Color.color_name,
+           gender: gender.sample,
+           age:  (1+Random.rand(10)),
+           last_seen_at: Faker::Address.city,
+           note: Faker::Lorem.paragraph,
+           lat: rand(-90.000000000...90.000000000),
+           long: rand(-180.000000000...180.000000000),
+           pet_type: pet_type.sample,
+           size: size.sample)
+end

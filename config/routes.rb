@@ -10,4 +10,11 @@ Rails.application.routes.draw do
   get '/auth/facebook', as: :sign_in_with_facebook
   get '/auth/facebook/callbacks/' => 'callbacks#facebook'
   resources :pets
+  
+  namespace :api, defaults: {format: :json} do
+    namespace :v1 do
+      resources :pets, only:[:index, :show, :create, :new]
+    end
+  end
+
 end
