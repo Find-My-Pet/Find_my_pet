@@ -1,0 +1,4 @@
+ENV['FACEBOOK_KEY'] = '??'
+ENV['FACEBOOK_SECRET'] = '??'
+ENV['TWITTER_KEY'] = ''
+ENV['TWITTER_SECRET'] = ''

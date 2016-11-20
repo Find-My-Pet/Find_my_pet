@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161119035633) do
+ActiveRecord::Schema.define(version: 20161120011800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,29 +24,29 @@ ActiveRecord::Schema.define(version: 20161119035633) do
   end
 
   create_table "pets", force: :cascade do |t|
-    t.string   "type"
     t.string   "name"
     t.string   "breed"
     t.string   "color"
     t.string   "gender"
     t.string   "age"
     t.string   "last_seen_at"
-    t.string   "lat"
-    t.string   "long"
     t.text     "note"
-    t.string   "image"
-    t.datetime "date_time"
     t.integer  "user_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.float    "lat"
+    t.float    "long"
+    t.string   "pet_type"
+    t.string   "size"
+    t.datetime "last_seen_date"
+    t.datetime "last_seen_time"
+    t.string   "image",          default: [],              array: true
     t.index ["user_id"], name: "index_pets_on_user_id", using: :btree
   end
 
   create_table "sightings", force: :cascade do |t|
-    t.string   "type"
+    t.string   "pet_type"
     t.string   "last_seen_at"
-    t.string   "long"
-    t.string   "lat"
     t.datetime "date_time"
     t.text     "note"
     t.string   "image"
@@ -55,6 +55,8 @@ ActiveRecord::Schema.define(version: 20161119035633) do
     t.integer  "pet_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.float    "lat"
+    t.float    "long"
     t.index ["pet_id"], name: "index_sightings_on_pet_id", using: :btree
   end
 
@@ -65,6 +67,12 @@ ActiveRecord::Schema.define(version: 20161119035633) do
     t.string   "password_digest"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "uid"
+    t.string   "provider"
+    t.string   "oauth_token"
+    t.string   "oauth_secret"
+    t.text     "oauth_raw_data"
+    t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", using: :btree
   end
 
   add_foreign_key "messages", "pets"

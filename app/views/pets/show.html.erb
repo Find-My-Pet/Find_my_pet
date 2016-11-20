@@ -1,0 +1,27 @@
+<h1>Show Page</h1>
+
+<h2><%= @pet.name %></h2><br><br>
+
+<section class="col-md-6">
+  <% if @pet.image.present?%>
+    <% @pet.image.each do |i| %>
+      <%= image_tag i.url(:large)%>
+    <%end%>
+  <%end%>
+</section>
+<div class="col-md-6">
+  <p><%= @pet.pet_type %></p>
+  <p><%= @pet.size %></p>
+  <p><%= @pet.breed %></p>
+  <p><%= @pet.color %></p>
+  <p><%= @pet.gender %></p>
+  <p><%= @pet.age %></p>
+  <p><%= @pet.last_seen_at %></p>
+  <p><%= @pet.note %></p>
+  <%=link_to edit_pet_path(@pet) do%>
+    <span class="glyphicon glyphicon-pencil"></span>
+  <%end%>
+  <%=link_to pet_path(@pet), method: :delete do %>
+    <span class="glyphicon glyphicon-trash"></span>
+  <%end%>
+</div>

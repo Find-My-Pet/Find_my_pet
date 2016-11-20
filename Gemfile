@@ -30,15 +30,19 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'gmaps4rails'
 gem 'underscore'
-gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+gem 'mini_magick'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'twitter'
 gem 'cancancan'
+gem 'simple_form'
 
+gem 'faker'
 gem 'interactive_editor'
 gem 'awesome_print'
 gem 'hirb'
+gem 'simple_form'
 
 # Bootstrap
 gem 'bootstrap-sass', '~> 3.3.6'

@@ -1,0 +1,30 @@
+<h1>Lost Your pet? Don't worry we will help you to find it!</h1>
+
+<%= simple_form_for  @pet  do |f| %>
+  <div class="col-md-6">
+    <%=f.input :pet_type, collection: @pet_type %>
+    <%=f.input :breed %>
+    <%=f.input :color %>
+    <%=f.input :size, collection: @size %>
+    <%=f.input :name %>
+    <%=f.input :gender, collection: @gender %>
+    <%=f.input :age %>
+    <%=f.input :last_seen_at %>
+    <div class="form-inline">
+      <%=f.input :last_seen_date, as: :date, order: [:day, :month, :year] %>
+      <%=f.input :last_seen_time, as: :time %>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div>
+      <%= f.file_field :image, multiple: :true %>
+    </div>
+    <%=f.input :note %>
+  </div>
+  <%= f.submit btn_label %>
+<%end%>
+
+<div style='width: 800px;'>
+  <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+  <div id="map" style='width: 800px; height: 400px;'></div>
+</div>
