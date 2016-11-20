@@ -32,8 +32,6 @@
           <div class="navbar-collapse collapse" id="petfinder-navbar">
             <ul class="nav navbar-nav">
               <li><%= link_to 'Home', home_path %></li>
-              <li><%= link_to 'Sign In', new_session_path %></li>
-              <li><%= link_to 'Sign Up', new_user_path %></li>
               <li><%= link_to 'Pets Spotted', sightings_path %></li>
               <li><%= link_to 'Report a Pet Sighting', new_sighting_path %></li>
             </ul>
@@ -51,6 +49,9 @@
                     class: 'btn btn-default navbar-btn'
                     %>
                   </li>
+              <%else %>
+                  <li><%= link_to 'Sign In', new_session_path %></li>
+                  <li><%= link_to 'Sign Up', new_user_path %></li>
               <% end %>
             </ul>
           </div>

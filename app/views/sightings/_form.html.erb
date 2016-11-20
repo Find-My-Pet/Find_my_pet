@@ -1,0 +1,25 @@
+<%= simple_form_for @sighting do |f| %>
+<div class="col-md-6">
+   <%= f.input :pet_type, collection: @pet_type %>
+   <%=f.input :last_seen_at %>
+ <div class="form-inline">
+   <%=f.input :date_time, as: :date, order: [:day, :month, :year] %>
+ </div>
+ <br><br>
+ <%= f.file_field :image %>
+ </div>
+ <div class="col-md-6">
+   <div>
+   </div>
+   <%=f.input :note %>
+   <h2>Your Contact Info</h2>
+    <%= f.input :name %>
+    <%= f.input :contact %>
+</div>
+ <%= f.submit btn_label %>
+<% end %>
+<br>
+<div style='width: 800px;'>
+  <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+  <div id="map" style='width: 800px; height: 400px;'></div>
+</div>

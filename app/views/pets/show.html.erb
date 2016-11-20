@@ -18,10 +18,13 @@
   <p><%= @pet.age %></p>
   <p><%= @pet.last_seen_at %></p>
   <p><%= @pet.note %></p>
-  <%=link_to edit_pet_path(@pet) do%>
-    <span class="glyphicon glyphicon-pencil"></span>
-  <%end%>
-  <%=link_to pet_path(@pet), method: :delete do %>
-    <span class="glyphicon glyphicon-trash"></span>
-  <%end%>
+  <%# if can? :manage, @pet %>
+    <%=link_to edit_pet_path(@pet) do%>
+      <span class="glyphicon glyphicon-pencil"></span>
+    <%end%>
+    <%=link_to pet_path(@pet), method: :delete do %>
+      <span class="glyphicon glyphicon-trash"></span>
+    <%end%>
+  <%#end%>
+
 </div>
