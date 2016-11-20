@@ -253,7 +253,7 @@ var getSightingsOfaPet = function(pet_id){
     error: function(xhr) {
       alert('No data');
     }
-  })
+  })f
 }
 
 
