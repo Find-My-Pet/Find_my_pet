@@ -32,8 +32,8 @@ ActiveRecord::Schema.define(version: 20161120011800) do
     t.string   "last_seen_at"
     t.text     "note"
     t.integer  "user_id"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.boolean  "found"
     t.float    "lat"
     t.float    "long"
