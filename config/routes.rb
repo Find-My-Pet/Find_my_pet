@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     delete :destroy, on: :collection
   end
 
-resources :sightings
+  resources :sightings
 
   get '/' => 'home#index', as: :home
 
@@ -15,6 +15,23 @@ resources :pets, shallow: true do
   end
 
   get '/auth/facebook', as: :sign_in_with_facebook
+  get '/auth/facebook/callback/' => 'callbacks#facebook'
+
+  get '/auth/twitter', as: :sign_in_with_twitter
+  get '/auth/twitter/callback/' => 'callbacks#twitter'
   get '/auth/facebook/callbacks/' => 'callbacks#facebook'
+  resources :pets
+
+  namespace :api, defaults: {format: :json} do
+    namespace :v1 do
+      resources :pets, only:[:index, :show, :create, :new]
+    end
+  end
+
+  namespace :api, defaults: {format: :json} do
+    namespace :v1 do
+      resources :sightings, only:[:index, :show, :create, :new]
+    end
+  end
 
 end
