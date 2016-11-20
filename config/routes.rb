@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get '/' => 'home#index', as: :home
 
 resources :pets, shallow: true do
+  get '/print' => 'pets#print'
   resources :sightings, only: [:new]
   resources :messages, only: [:create, :destroy]
   end
@@ -20,7 +21,7 @@ resources :pets, shallow: true do
   get '/auth/twitter', as: :sign_in_with_twitter
   get '/auth/twitter/callback/' => 'callbacks#twitter'
   get '/auth/facebook/callbacks/' => 'callbacks#facebook'
-  resources :pets
+
 
   namespace :api, defaults: {format: :json} do
     namespace :v1 do
