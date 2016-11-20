@@ -1,12 +1,28 @@
 <h1>Sighting</h1>
 
-<%= @sighting.image %>
+<section>
+<% if @sighting.image.present? %>
+      <%= image_tag @sighting.image.url, class: 'question-thumbnail' %>
+<% end %>
+</section>
+
+<div>
 <%= @sighting.pet_type %>
+</div>
+<div>
 <%= @sighting.note %>
-
-
-Last Seen at:<%= @sighting.date_time %> Location: <%= @sighting.last_seen_at %>
-
+</div>
+<div>
+Last Seen at: <%= @sighting.date_time %>
+</div>
+<div>
+Location: <%= @sighting.last_seen_at %>
+</div>
+<div>
 <h2>Contact Info</h2>
+<div>
 <%= @sighting.name %>
+</div>
+<div>
 <%= @sighting.contact %>
+</div>

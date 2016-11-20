@@ -1,6 +1,7 @@
 <h1>All Sightings</h1>
 <% @sightings.each do |f|%>
-<%= f.pet_type %><br>
-<p>Last seen:</p> <%= f.date_time %> at <%= f.last_seen_at   %>
+<%= image_tag f.image.url(:thumb), class: 'question-thumbnail' if f.image.present? %>
+<%=link_to f.pet_type, sighting_path(f)%><br>
+Last seen: <%= f.date_time %> at <%= f.last_seen_at   %>
 <hr>
 <% end %>
