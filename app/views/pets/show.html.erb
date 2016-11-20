@@ -17,6 +17,8 @@
   <p><%= @pet.gender %></p>
   <p><%= @pet.age %></p>
   <p><%= @pet.last_seen_at %></p>
+  <p><%= @pet.last_seen_date.strftime('%b %d %Y') %>
+  <%= @pet.last_seen_time.strftime('%I:%M %p') %></p>
   <p><%= @pet.note %></p>
   <%=link_to edit_pet_path(@pet) do%>
     <span class="glyphicon glyphicon-pencil"></span>
