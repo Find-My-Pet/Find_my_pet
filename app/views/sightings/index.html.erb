@@ -1,0 +1,6 @@
+<h1>All Sightings</h1>
+<% @sightings.each do |f|%>
+<%= f.pet_type %><br>
+<p>Last seen:</p> <%= f.date_time %> at <%= f.last_seen_at   %>
+<hr>
+<% end %>

@@ -1,9 +1,7 @@
-<h1>Create a New sighting</h1>
+<h1>Edit Sighting</h1>
 <%= @sighting.errors.full_messages.join(', ') %>
 <%= form_for @sighting do |f| %>
-<h2>Pet description</h2>
  <div>
-   <%= f.label :pet_type %>
    <%= f.select :pet_type, @pet_type %>
  </div>
  <div>

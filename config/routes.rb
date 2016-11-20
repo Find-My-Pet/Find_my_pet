@@ -5,8 +5,10 @@ Rails.application.routes.draw do
     delete :destroy, on: :collection
   end
 
-  resources :sightings, only: [:new, :create]
+resources :sightings
 
   get '/' => 'home#index', as: :home
-  resources :pets
+resources :pets, shallow: true do
+  resources :sightings, only: [:create]
+end
 end
