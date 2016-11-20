@@ -8,7 +8,13 @@ Rails.application.routes.draw do
 resources :sightings
 
   get '/' => 'home#index', as: :home
+
 resources :pets, shallow: true do
   resources :sightings, only: [:create]
-end
+  resources :messages, only: [:create, :destroy]
+  end
+
+  get '/auth/facebook', as: :sign_in_with_facebook
+  get '/auth/facebook/callbacks/' => 'callbacks#facebook'
+
 end

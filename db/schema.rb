@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 20161120002347) do
+
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +42,7 @@ ActiveRecord::Schema.define(version: 20161120002347) do
     t.float    "long"
     t.string   "pet_type"
     t.string   "size"
+    t.boolean  "found"
     t.datetime "last_seen_date"
     t.datetime "last_seen_time"
     t.index ["user_id"], name: "index_pets_on_user_id", using: :btree
@@ -67,6 +71,12 @@ ActiveRecord::Schema.define(version: 20161120002347) do
     t.string   "password_digest"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "uid"
+    t.string   "provider"
+    t.string   "oauth_token"
+    t.string   "oauth_secret"
+    t.text     "oauth_raw_data"
+    t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", using: :btree
   end
 
   add_foreign_key "messages", "pets"
