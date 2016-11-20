@@ -42,6 +42,10 @@ class PetsController < ApplicationController
     redirect_to pets_path
   end
 
+  def print
+    render layout: "print"
+  end
+
   private
 
   def set_defaults
