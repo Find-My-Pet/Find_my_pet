@@ -69,6 +69,7 @@ class PetsController < ApplicationController
                                  :last_seen_at,
                                  :lat,
                                  :long,
+                                 :found,
                                  :note,
                                  {image: []},
                                  :last_seen_date,

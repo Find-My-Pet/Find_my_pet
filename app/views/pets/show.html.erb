@@ -23,8 +23,9 @@
   <div>
     <p>Found Your pet?</p>
     <p>
+        <% check_state = @pet.found ? 'checked' : 'unchecked' %>
         <%= simple_form_for @pet do |f| %>
-            <%= f.input :found, as: :boolean %>
+            <%= f.input :found, as: :boolean, :input_html => { :checked => check_state } %>
             <%= f.submit 'Confirm' %>
         <% end %>
     </p>
