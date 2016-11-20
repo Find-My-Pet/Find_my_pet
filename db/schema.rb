@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161120011800) do
+ActiveRecord::Schema.define(version: 20161120033344) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,12 +34,13 @@ ActiveRecord::Schema.define(version: 20161120011800) do
     t.integer  "user_id"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.boolean  "found"
     t.float    "lat"
     t.float    "long"
     t.string   "pet_type"
     t.string   "size"
-    t.datetime "last_seen_date"
-    t.datetime "last_seen_time"
+    t.date     "last_seen_date"
+    t.time     "last_seen_time"
     t.string   "image",          default: [],              array: true
     t.index ["user_id"], name: "index_pets_on_user_id", using: :btree
   end
