@@ -1,0 +1,14 @@
+@import "mixins";
+@import "variables";
+
+.btn-primary{
+  background: $btn-primary-color;
+  box-shadow: 0px 15px 10px -10px rgba(0,0,0,0.3);
+   transition: all 200ms cubic-bezier(0.25, 0.39, 0.39, 2.01);
+
+   &:hover{
+     transform: scale(1.05);
+     box-shadow: 0px 25px 15px -15px rgba(0,0,0,0.3)
+
+   }
+}

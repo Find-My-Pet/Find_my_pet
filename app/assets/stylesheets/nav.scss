@@ -1,0 +1,62 @@
+@import "mixins";
+@import "variables";
+
+.navbar-brand{
+  overflow: hidden;
+  height: inherit;
+  .logo-nav{
+    transition: all 1s;
+    padding: 0 5px;
+    &:hover{
+       background: lighten($navbar-default-bg, 5%);
+      // opacity: .5;
+      cursor: pointer;
+      transform: scale(1.02);
+    }
+  }
+}
+
+.navbar{
+  margin-bottom: 0;
+  @include box-shadow(2px, 3px, 6px, $btn-default-color);
+  // transform: rotate(-1deg);
+  // margin: -20px;
+  // padding: 20px;
+}
+
+#navbar{
+  min-height: 85px;
+  // transform: rotate(1deg);
+  // padding: 9px 0;
+
+
+  a{
+    transition: all 1s;
+    border-bottom: solid 3px $navbar-default-bg;
+
+    &:hover{
+      border-bottom: solid 3px $brand-info;
+
+    }
+  }
+
+  .navbar-nav{
+    margin-top: 18px;
+  }
+
+  .btn-primary{
+    padding: 5px 12px;
+    margin: 10px;
+
+    color: white;
+    @include rounded(5px);
+
+    &:hover{
+      background: darken($btn-primary-color,15%)
+    }
+
+
+
+  }
+
+}
