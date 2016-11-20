@@ -4,3 +4,11 @@
 #header{
   background-image: $navbar-default-bg;
 }
+
+.list_panel{
+  padding: 5px;
+  overflow: hidden;
+  .img-circle{
+    @include box-shadow(2px, 2px, 5px, lighten($btn-default-color,30%)) ;
+  }
+}
