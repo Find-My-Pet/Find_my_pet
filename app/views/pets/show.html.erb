@@ -26,6 +26,12 @@
         <% check_state = @pet.found ? 'checked' : 'unchecked' %>
         <%= simple_form_for @pet do |f| %>
             <%= f.input :found, as: :boolean, :input_html => { :checked => check_state } %>
+            <% if user_signed_in? && current_user.signed_in_with_twitter? %>
+                <%= f.input :tweet_this, as: :boolean, :input_html => { :checked => 'unchecked' } %>
+            <% end %>
+            <% if user_signed_in? && current_user.signed_in_with_facebook? %>
+                <%= f.input :share_on_facebook, as: :boolean, :input_html => { :checked => 'unchecked' } %>
+            <% end %>
             <%= f.submit 'Confirm' %>
         <% end %>
     </p>
