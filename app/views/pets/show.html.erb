@@ -4,7 +4,9 @@
 
 <section class="col-md-6">
   <% if @pet.image.present?%>
-    <%= image_tag @pet.image.url(:large)%>
+    <% @pet.image.each do |i| %>
+      <%= image_tag i.url(:large)%>
+    <%end%>
   <%end%>
 </section>
 <div class="col-md-6">

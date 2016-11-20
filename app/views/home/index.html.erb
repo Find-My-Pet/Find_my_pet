@@ -1,2 +1,15 @@
 <h1>Home Page</h1>
-<p>where is this text?</p>
+
+<% unless user_signed_in? %>
+    <%= button_to 'Sign In With Facebook', sign_in_with_facebook_path, method: :get %>
+    <p>or</p>
+    <%= button_to 'Sign In With Twitter', sign_in_with_twitter_path, method: :get %>
+    <p>Or with Email</p>
+    <%= simple_form_for User.new do |f| %>
+        <%= f.input :first_name %>
+        <%= f.input :last_name %>
+        <%= f.input :email %>
+        <%= f.input :password %>
+        <%= f.submit %>
+    <% end %>
+<% end %>

@@ -24,8 +24,7 @@ class User < ApplicationRecord
   end
 
   def self.find_from_oauth(oauth_data)
-    User.where(provider: oauth_data['provider'],
-               uid: oauth_data['uid']).first
+    User.where("email = ? OR (provider = ? AND uid = ?)", oauth_data['info']['email'], oauth_data['provider'], oauth_data['uid']).first
   end
 
   def self.create_from_oauth(oauth_data)
