@@ -23,12 +23,17 @@ $( document ).ready(function() {
   map = initMap();
   map.mapTypes.set("map_style", styledMap);
   map.setMapTypeId("map_style");
-
+  window.globals = {};
   // Get all the lost pets
-  var lostpets = getLostPets();
-  console.log(lostpets);
+  getLostPets();
   // get sightings by pet id
   getSightingsOfaPet(4);
+  
+  
+  $('#filter_button').on('click', function(){
+    filterPetsByType(globals.pets, "Dog");
+  });
+
 });
 
 function initMap() {
@@ -224,15 +229,13 @@ var closeAllInfoWindows = function() {
 
 var getLostPets = function(){
   // Get all the lost pets and draw markers on the map
-  var pets; 
   $.get('/api/v1/pets', (data) => {
-    pets = data;
+    window.globals.pets = data;
+    console.log(globals.pets);
     for (var i=0; i < data.length; i++){
       addLostPetsMarker({lat:data[i].lat, lng: data[i].lng}, map, data[i].name);
     }
   });
-  console.log(pets);
-  return pets;
 }
 
 // Get all the sightings by pet id
@@ -243,6 +246,8 @@ var getSightingsOfaPet = function(pet_id){
     type: "get", //send it through get method
     data:{id: pet_id},
     success: function(data) {
+      window.globals.sightings = data;
+      console.log(globals.sightings);
       addSightingsMarker(data, map);
     },
     error: function(xhr) {
@@ -251,10 +256,7 @@ var getSightingsOfaPet = function(pet_id){
   })
 }
 
+
 var filterPetsByType = function(pets_data, pet_type){
-  return my_object.filter(function(obj) {
-  return Object.keys(my_criteria).every(function(c) {
-    return obj[c] == my_criteria[c];
-  });
-});
-}
+  console.log(pets_data[0].pet_type);
+};
