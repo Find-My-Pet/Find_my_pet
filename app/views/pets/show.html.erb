@@ -17,7 +17,14 @@
   <p><%= @pet.gender %></p>
   <p><%= @pet.age %></p>
   <p><%= @pet.last_seen_at %></p>
+  <p><%= @pet.last_seen_date.strftime('%b %d %Y') %>
+  <%= @pet.last_seen_time.strftime('%I:%M %p') %></p>
   <p><%= @pet.note %></p>
+  <div>
+    <p>Found Your pet?</p>
+    <p><%#= @pet.found %></p>
+  </div>
+
   <%=link_to edit_pet_path(@pet) do%>
     <span class="glyphicon glyphicon-pencil"></span>
   <%end%>
@@ -26,7 +33,17 @@
   <%end%>
 </div>
 
-<div>
-  <p>Found Your pet?</p>
-  <p><%#= @pet.found %></p>
+<br>
+
+<div class="row">
+  <div class="col-md-6">
+    <div id="message-form">
+      <%= render '/messages/form' %>
+    </div>
+    <div id="messages">
+      <% @pet.messages.each do |message| %>
+        <%= render('/messages/message', {message: message}) %>
+      <%end%>
+    </div>
+  </div>
 </div>
