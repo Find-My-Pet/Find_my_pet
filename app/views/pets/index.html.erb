@@ -1,16 +1,19 @@
-<h1>All Lost Pets</h1>
 
-<% @pets.each do |p|%>
-  <h3><%=link_to p.name, pet_path(p) %></h3>
-  <p><%=p.breed%></p>
-  <p><%=p.color%></p>
-  <section>
-    <% if p.image.present?%>  
-      <%= image_tag p.image[0].url(:thumb), class: 'image-index'%>
-    <%end%>
-  </section>
-  <%= link_to 'Did you see this pet?', new_pet_sighting_path(p)%>
-  <hr>
-<%end%>
+<div class="container">
+  <h1>All Lost Pets</h1>
 
-<%= link_to 'Not one of those? Make a new spot!', new_sighting_path %>
+  <% @pets.each do |p|%>
+    <h3><%=link_to p.name, pet_path(p) %></h3>
+    <p><%=p.breed%></p>
+    <p><%=p.color%></p>
+    <section>
+      <% if p.image.present?%>
+        <%= image_tag p.image[0].url(:thumb), class: 'image-index'%>
+      <%end%>
+    </section>
+    <%= link_to 'Did you see this pet?', new_pet_sighting_path(p)%>
+    <hr>
+  <%end%>
+
+  <%= link_to 'Not one of those? Make a new spot!', new_sighting_path %>
+</div>
