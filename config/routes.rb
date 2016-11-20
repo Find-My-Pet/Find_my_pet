@@ -9,4 +9,7 @@ Rails.application.routes.draw do
   resources :pets, shallow: true do
     resources :messages, only: [:create, :destroy]
   end
+
+  get '/auth/facebook', as: :sign_in_with_facebook
+  get '/auth/facebook/callbacks/' => 'callbacks#facebook'
 end
