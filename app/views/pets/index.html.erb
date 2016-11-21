@@ -4,53 +4,7 @@
 <div class="container">
 </br>
 
-  <%= form_for @sighting do |f| %>
-  <div class="col-md-3 col-md-offset-1">
-    <h2>Pet description</h2>
-     <div>
-       <%= f.label :pet_type %>
-       <%= f.text_field :pet_type %>
-     </div>
-     <div>
-       <%= f.label :last_seen_at %>
-        <%= f.text_field :last_seen_at %>
-     </div>
-     <div>
-       <%= f.label :date_time %>
-        <%= f.text_field :date_time %>
-     </div>
-     <div>
-       <div><%= f.label :note %></div>
-        <%= f.text_area :note %>
-     </div>
-
-     <div>
-       <%= f.file_field :image %>
-     </div>
-   </br>
-      </br>
-   </div>
-
-  <div class="col-md-4">
-     <h2>Your Contact Info (Optional)</h2>
-     <div>
-       <%= f.label :name %>
-        <%= f.text_field :name %>
-     </div>
-     <div>
-       <%= f.label :contact %>
-        <%= f.text_field :contact %>
-     </div>
-     <%= f.submit %>
-    <% end %>
-  </div>
-
-    <div class="col-md-4">
-      <h2>Not one of those? </h2>
-      <%= link_to 'Make a new spot!', new_sighting_path, class: 'btn btn-primary' %>
-
-    </div>
-</div>
+  
 <h1 class="text-center">All Lost Pets <i class="fa fa-chevron-down" aria-hidden="true"></i> </br></h1>
 <div >
   <input id="pac-input" class="controls" type="text" placeholder="Search Box">
