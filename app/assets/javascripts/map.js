@@ -56,16 +56,22 @@ function initMap() {
     $('#sighting_last_seen_at').val(event.latLng)
   });
 
-  // var infoWindow = new google.maps.InfoWindow({map: map});
-
   // ##### TO BE ADDED TO 'PET DIVS' TO GET SIGHTINGS FOR HEATMAP ###########
   // google.maps.event.addDomListener(getSightings, 'click', function() {
   // globals.heatmap.setMap(null);
   // getSightingsOfaPet('-THE-PET-ID-', globals.heatmap);
   //});
 
+  if ($('#show-map').html()) {
+    var slugArr = /(\d+)$/.exec(document.URL);
+    getSightingsOfaPet(slugArr[0]);
+    // myPet = window.globals.pets.filter(function(data){ return window.globals.pets.id == slugArr[0] });
+    // console.log(myPet);
+    // map.panTo({lat: })
 
-  var infoWindow = new google.maps.InfoWindow({map: map});
+  };
+
+  // var infoWindow = new google.maps.InfoWindow({map: map});
 
   // Create the search box and link it to the UI element.
   var input = document.getElementById('pac-input');
@@ -253,6 +259,7 @@ var getLostPets = function(){
     window.globals.allpets = data;
     // console.log(globals.pets);
     for (var i=0; i < data.length; i++){
+<<<<<<< 74a5bc6f9cbc11dc8bd0cb7957a0606a951b1586
       addLostPetsMarker({lat:data[i].lat, lng: data[i].lng}, map, data[i].name);
     }
   });
@@ -286,6 +293,8 @@ var getPetsInView = function(bounds){
     (data) => {
     window.globals.pets = data;
     for (var i=0; i < data.length; i++){
+=======
+>>>>>>> rebasing from integration
       addLostPetsMarker({lat:data[i].lat, lng: data[i].lng}, map, data[i].name);
     }
   });
