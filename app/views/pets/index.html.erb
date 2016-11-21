@@ -1,21 +1,4 @@
 
-<ul>
-<% @pets.each do |p|%>
-<li style="list-style: none" id="<%= p.id %>">
-  <h3><%=link_to p.name, pet_path(p) %></h3>
-  <p><%=p.breed%></p>
-  <p><%=p.color%></p>
-  <section>
-    <% if p.image.present?%>
-      <%= image_tag p.image[0].url(:thumb), class: 'image-index'%>
-    <%end%>
-  </section>
-  <a id="choose-sighting">Did you see this pet?</a>
-</li>
-  <hr>
-<%end%>
-</ul>
-
 <%= link_to 'Not one of those? Make a new spot!', new_sighting_path %>
 <%= form_for @sighting do |f| %>
 <h2>Pet description</h2>
