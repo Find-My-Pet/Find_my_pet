@@ -36,6 +36,7 @@ gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'twitter'
 gem 'koala'
+gem "fog-aws"
 
 gem 'cancancan'
 gem 'simple_form'
