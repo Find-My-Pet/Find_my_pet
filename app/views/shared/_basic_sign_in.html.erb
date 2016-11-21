@@ -1,22 +1,41 @@
-<%= button_to 'Sign In With Facebook', sign_in_with_facebook_path, class:"btn btn-default", method: :get %>
-<p>or</p>
-<%= button_to 'Sign In With Twitter', sign_in_with_twitter_path, class:"btn btn-default", method: :get %>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="col-md-12 text-center">
+      <%= button_to sign_in_with_facebook_path, class:"btn btn-default fb", method: :get do %>
+        <i class="fa fa-facebook" aria-hidden="true"></i>Sign Up With Facebook</i>
+      <% end %>
+      <p>_</p>
+      <%= button_to sign_in_with_twitter_path, class:"btn btn-default tw" , method: :get do%>
+        <i class="fa fa-twitter" aria-hidden="true"></i>Sign Up With Twitter</i>
+      <% end %>
+    </br>
+    
+    </div>
 
-<%= form_tag sessions_path do %>
-  <div class="form-group">
-    <%= label_tag :email %>
-    <%= text_field_tag :email, nil, class: "form-control" %>
+
+
+    <%= form_tag sessions_path do %>
+      <div class="form-group">
+        <%= label_tag :email %>
+        <%= text_field_tag :email, nil, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= label_tag :password %>
+        <%= password_field_tag :password, nil, class: "form-control" %>
+      </div>
+
+
+
+    <div class="modal-footer">
+      <%= submit_tag 'Sign In', class: "btn btn-primary btn-block"%>
+    </div>
+
+    <div class="col-md-12 text-center">
+
+       Don't Have an account?
+      <a class="#" data-dismiss="modal" data-toggle="modal" data-target="#SignUp">Sign Up</a>
+    </div>
+    <% end %>
   </div>
-
-  <div class="form-group">
-    <%= label_tag :password %>
-    <%= password_field_tag :password, nil, class: "form-control" %>
-  </div>
-
-  <p> Don't Have an account? </p>
-  <a class="#" data-dismiss="modal" data-toggle="modal" data-target="#SignUp">Sign Up</a>
-
-<div class="modal-footer">
-  <%= submit_tag 'Sign In', class: "btn btn-default"%>
 </div>
-<% end %>
