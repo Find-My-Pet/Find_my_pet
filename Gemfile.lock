@@ -118,6 +118,10 @@ GEM
       addressable (~> 2.3)
     letter_opener (1.4.1)
       launchy (~> 2.2)
+    koala (2.4.0)
+      addressable
+      faraday
+      multi_json (>= 1.3.0)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -281,7 +285,11 @@ DEPENDENCIES
   interactive_editor
   jbuilder (~> 2.5)
   jquery-rails
+<<<<<<< HEAD
   letter_opener
+=======
+  koala
+>>>>>>> share_on_facebook
   listen (~> 3.0.5)
   mini_magick
   omniauth-facebook
