@@ -13,6 +13,14 @@ class User < ApplicationRecord
 
   has_many :pets, dependent: :destroy
 
+  def signed_in_with_twitter?
+    uid.present? && provider == 'twitter'
+  end
+
+  def signed_in_with_facebook?
+    uid.present? && provider == 'facebook'
+  end
+
   private
 
   def downcase_email

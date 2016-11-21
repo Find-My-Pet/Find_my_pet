@@ -15,3 +15,16 @@
 //= require jquery_ujs
 // require turbolinks
 //= require_tree .
+
+$(function () {
+
+  $('.pet-selected').change(function() {
+    var petSelected = $('.pet-selected :selected').val()
+    if (petSelected == 'Other'){
+      $('.pet-other').slideDown(800);
+    } else {
+      $('.pet-other').slideUp(800);
+    }
+  })
+
+})

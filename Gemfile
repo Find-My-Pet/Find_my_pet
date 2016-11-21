@@ -35,6 +35,8 @@ gem 'mini_magick'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'twitter'
+gem 'koala'
+
 gem 'cancancan'
 gem 'simple_form'
 
@@ -42,7 +44,6 @@ gem 'faker'
 gem 'interactive_editor'
 gem 'awesome_print'
 gem 'hirb'
-gem 'simple_form'
 
 # Bootstrap
 gem 'bootstrap-sass', '~> 3.3.6'
@@ -69,6 +70,8 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'hirb'
+  gem 'letter_opener'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

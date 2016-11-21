@@ -1,3 +1,4 @@
+
 <div class="container">
   <div class="row">
     <div class="col-md-6 col-md-offset-3 sighting-form">
@@ -47,3 +48,14 @@
       </div>
     </div>
   </div>
+
+<h1>Report Sighting</h1>
+
+<% if @sighting.pet_id.present? %>
+  <h2><%= @sighting.pet.name %></h2>
+  <% if @sighting.pet.image.present? %>
+
+  <%end %>
+<%end %>
+
+<%= render 'form', {btn_label: 'Submit'} %>
