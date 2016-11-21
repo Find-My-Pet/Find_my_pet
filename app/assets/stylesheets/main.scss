@@ -79,6 +79,17 @@ table {
 
 }
 
+.thumbnail{
+
+  .imagewrapper{
+    height: 126px;
+    overflow: hidden;
+  }
+  img{
+    width: 100%
+  }
+}
+
 .moreinfo{
   border: solid 1px;
   padding: 20px;

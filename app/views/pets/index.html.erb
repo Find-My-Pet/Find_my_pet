@@ -1,10 +1,7 @@
-
-
-
 <div class="container">
 </br>
 
-  
+
 <h1 class="text-center">All Lost Pets <i class="fa fa-chevron-down" aria-hidden="true"></i> </br></h1>
 <div >
   <input id="pac-input" class="controls" type="text" placeholder="Search Box">
@@ -41,17 +38,20 @@ var getLostPets = function(){
 
 
 <div class="container">
-
-
-
-
   <% @pets.each do |p|%>
     <div class="col-xs-6 col-sm-6 col-md-3">
       <div class="thumbnail">
         <% if p.image.present?%>
+        <div class="imagewrapper">
+
+
           <%= image_tag p.image[0].url(:large), class: 'image-index image-circle'%>
+
+        </div>
         <%else%>
+          <div class="imagewrapper">
          <%=image_tag asset_path("image_dog_03@2x.png") %>
+           </div>
 
         <%end%>
         <div class="caption">
