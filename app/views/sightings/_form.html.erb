@@ -2,19 +2,25 @@
 <div class="row form-sighting ">
     <div class="col-md-6">
       <div class="form-title">
-      <h1>Report a Sighting</h1>
+      <h1>Have You Seen a Lost Pet?</h1>
       </div>
       <%= simple_form_for @sighting do |f| %>
-         <%= f.input :pet_type, collection: @pet_type %>
+        <div class="pet-selected">
+          <%=f.input :pet_type, collection: @pet_type, label: 'Species' %>
+        </div>
+        <div class="pet-other" style="display: none;">
+          <%=f.input :pet_type, placeholder: 'Please type the specie of your pet', label: 'Species', input_html: { id: 'dingdong' } %>
+        </div>
          <%= f.hidden_field :pet_id %>
          <br>
-         <%= f.file_field :image %>
          <%=f.input :note %>
-         <%=f.input :last_seen_at %>
+         <p><strong>Last Seen At (Please select on the map): </strong><p>
+         <%=f.hidden_field :last_seen_at %>
        <div class="form-inline">
-         <%=f.input :date_time, as: :date, order: [:day, :month, :year] %>
-       </div>
-         <h2>Your Contact Info (Optional)</h2>
+         <%=f.input :date_time, as: :date, order: [:day, :month, :year], label: 'Date' %>
+       </div><br>
+       <%= f.file_field :image %><br>
+       <h2>Your Contact Info (Optional)</h2>
           <%= f.input :name %>
           <%= f.input :contact %>
        <%= f.submit btn_label %>
