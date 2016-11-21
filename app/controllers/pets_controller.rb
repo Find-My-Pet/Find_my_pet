@@ -59,7 +59,11 @@ class PetsController < ApplicationController
 
   def print
     @pet = Pet.find params[:pet_id]
-    render layout: "print"
+    if @pet.image.present?
+      render layout: "print"
+    else
+      redirect_to pet_path(@pet), notice: "No picture to print, Please upload a Picture."
+    end
   end
 
   private
