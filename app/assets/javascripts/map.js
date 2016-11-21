@@ -30,10 +30,7 @@ $( document ).ready(function() {
   });
   // Get all the lost pets
   getLostPets();
-  // get sightings by pet id
-  getSightingsOfaPet(4);
-
-
+  
   $('#filter_button').on('click', function(){
     filterPetsByType(globals.pets, "Dog");
   });
@@ -254,6 +251,7 @@ var getLostPets = function(){
     // console.log(globals.pets);
     for (var i=0; i < data.length; i++){
       addLostPetsMarker({lat:data[i].lat, lng: data[i].lng}, map, data[i].name);
+      listPets(data);
     }
   });
 }
@@ -317,6 +315,33 @@ var getSightingsOfaPet = function(pet_id){
 function getPetsByType(pets_data, type, map) {
   var pets = pets_data;
   return pets.filter(
-      function(data){ return pets.pet_type == type }
+      function(pets){ return pets.pet_type == type }
   );
+}
+
+var listPets = function(pets){
+  for (var i=0; i<pets.length; i ++){    
+      $('.pets-list :last-child').remove;
+      $('.pets-list ul').prepend(
+        `<li>
+          <div class="panel panel-default list_panel">
+            <h3 class="text-center">Have you see me ?</h3>
+            <div class="col-md-6">
+              <img class='img-circle' src="/assets/tbn.jpg" alt="" />
+            </div>
+
+            <div class="col-md-6">
+              <div class="col-md-6">
+                <p>Name: ${pets[i].name}</p>
+              </div>
+              <div class="col-md-6">
+                <a href="/pets/${pets[i].id}" class="btn btn-default">More info</a>
+                <a href="#" class="btn btn-default">Report</a>
+              </div>
+
+            </div>
+          </div>
+        </li>
+        `);
+  }
 }
