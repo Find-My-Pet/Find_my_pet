@@ -21,8 +21,8 @@ gender = ['Male', 'Female']
            last_seen_date: Faker::Date.forward(30),
            last_seen_time: Faker::Time.backward(30, :all),
            note: Faker::Lorem.paragraph,
-           lat: rand(49.24...49.28),
-           long: rand(-123.13...-123.11),
+           lat: rand(49.1...49.3),
+           long: rand(-123.2...-122.0),
            pet_type: pet_type.sample,
            size: size.sample)
 end
@@ -33,8 +33,8 @@ end
            last_seen_at: Faker::Address.city,
            pet_type: pet.pet_type,
            note: Faker::Lorem.paragraph,
-           lat: rand(49.24...49.28),
-           long: rand(-123.13...-123.11),
+           lat: rand(49.1...49.3),
+           long: rand(-123.2...-122.0),
            pet_id: pet.id,
            date_time: Faker::Time.between(2.days.ago, Date.today, :all)
            )
