@@ -9,10 +9,10 @@
       </div>
       <div class="modal-body">
       <% unless user_signed_in? %>
-        <%= form_tag sessions_path do %>
           <%= button_to 'Sign In With Facebook', sign_in_with_facebook_path, method: :get %>
           <p>or</p>
           <%= button_to 'Sign In With Twitter', sign_in_with_twitter_path, method: :get %>
+        <%= form_tag sessions_path do %>
             <div class="form-group">
                 <%= label_tag :email %>
                 <%= text_field_tag :email, nil, class: "form-control" %>
