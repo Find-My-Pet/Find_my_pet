@@ -21,19 +21,22 @@ gender = ['Male', 'Female']
            last_seen_date: Faker::Date.forward(30),
            last_seen_time: Faker::Time.backward(30, :all),
            note: Faker::Lorem.paragraph,
-           lat: rand(49.100000000...49.5000000000),
-           long: rand(-123.000000000...-121.000000000),
+           lat: rand(49.24...49.28),
+           long: rand(-123.13...-123.11),
            pet_type: pet_type.sample,
            size: size.sample)
 end
 
-200.times do |i|
+2000.times do |i|
+ pet = Pet.find(Random.rand(1..Pet.count))
  Sighting.create(name: Faker::Name.name,
            last_seen_at: Faker::Address.city,
+           pet_type: pet.pet_type,
            note: Faker::Lorem.paragraph,
-           lat: rand(-90.000000000...90.000000000),
-           long: rand(-180.000000000...180.000000000),
-           pet_id:(Random.rand(1..Pet.count))
+           lat: rand(49.24...49.28),
+           long: rand(-123.13...-123.11),
+           pet_id: pet.id,
+           date_time: Faker::Time.between(2.days.ago, Date.today, :all)
            )
 end
 

@@ -14,7 +14,7 @@ const info =
 
 var mapstyle = [
 {"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"administrative.country","elementType":"labels.text.fill","stylers":[{"hue":"#ff0000"}]},{"featureType":"administrative.locality","elementType":"labels.text.fill","stylers":[{"color":"#ff0000"}]},{"featureType":"administrative.land_parcel","elementType":"labels.text.fill","stylers":[{"color":"#ff0000"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road","elementType":"labels.text.fill","stylers":[{"hue":"#ff0000"}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"weight":"0.90"}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#ababab"}]},{"featureType":"road.arterial","elementType":"geometry.stroke","stylers":[{"weight":"0.30"},{"visibility":"off"},{"hue":"#ff0000"}]},{"featureType":"road.arterial","elementType":"labels.text.fill","stylers":[{"color":"#ff0000"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"road.local","elementType":"geometry.fill","stylers":[{"color":"#ff0000"},{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#838383"},{"visibility":"on"}]}
-]
+];
 
 $( document ).ready(function() {
   var styledMap = new google.maps.StyledMapType(mapstyle, {name: "styled map"});
@@ -23,12 +23,22 @@ $( document ).ready(function() {
   map = initMap();
   map.mapTypes.set("map_style", styledMap);
   map.setMapTypeId("map_style");
+  window.globals = {};
 
+  globals.heatmap = new google.maps.visualization.HeatmapLayer({
+    radius: 15
+  });
   // Get all the lost pets
   getLostPets();
 
-  // get sightings by pet id
-  getSightingsOfaPet(20);
+
+
+
+  $('#filter_button').on('click', function(){
+    filterPetsByType(globals.pets, "Dog");
+  });
+
+
 });
 
 function initMap() {
@@ -46,7 +56,16 @@ function initMap() {
     $('#sighting_last_seen_at').val(event.latLng)
   });
 
-  var infoWindow = new google.maps.InfoWindow({map: map});
+  // ##### TO BE ADDED TO 'PET DIVS' TO GET SIGHTINGS FOR HEATMAP ###########
+  // google.maps.event.addDomListener(getSightings, 'click', function() {
+  // globals.heatmap.setMap(null);
+  // getSightingsOfaPet('-THE-PET-ID-', globals.heatmap);
+  //});
+
+
+
+  // var infoWindow = new google.maps.InfoWindow({map: map});
+
   // Create the search box and link it to the UI element.
   var input = document.getElementById('pac-input');
   var searchBox = new google.maps.places.SearchBox(input);
@@ -54,9 +73,25 @@ function initMap() {
 
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-  map.addListener('bounds_changed', function() {
+  var getPetsListeneer = map.addListener('bounds_changed', function() {
     searchBox.setBounds(map.getBounds());
+    if (!$('#show-map').html()){
+      getPetsInView(map.getBounds());
+    }
   });
+
+  if ($('#show-map').html()) {
+    var slugArr = /(\d+)$/.exec(document.URL);
+    getSightingsOfaPet(slugArr[0]);
+    markers.forEach(function(marker) {
+      marker.setMap(null);
+    });
+    //google.maps.event.removeListener(getPetsListener);
+    // myPet = window.globals.allpets.filter(function(data){ return window.globals.allpets.id == slugArr[0] });
+    // console.log(myPet.id);
+    // map.panTo({lat: })
+
+  }
 
   searchBox.addListener('places_changed', function() {
          var places = searchBox.getPlaces();
@@ -111,10 +146,24 @@ function initMap() {
               lat: position.coords.latitude,
               lng: position.coords.longitude
             };
+            window.globals.location = pos;
             // infoWindow.setPosition(pos);
             // infoWindow.setContent('Location found.');
-            map.setCenter(pos);
-            addMarker(pos, map);
+              if (!$('#show-map').html()){
+                map.setCenter(pos);
+                addMarker(pos, map);
+              } else {
+                var slugArr = /(\d+)$/.exec(document.URL);
+                console.log(slugArr[0]);
+                console.log(window.globals.allpets)
+                var myPet = window.globals.allpets.filter(function(data){ return data.id == slugArr[0] });
+
+                var pos = {lat: myPet[0].lat, lng: myPet[0].lng}
+                map.setCenter(pos);
+                addMarker(pos, map);
+              }
+
+            // getCloseLostPets();
             $('#pet_last_seen_at').val(`(${pos.lat}, ${pos.lng})`)
             $('#sighting_last_seen_at').val(`(${pos.lat}, ${pos.lng})`)
           }, function() {
@@ -204,11 +253,11 @@ function addSightingsMarker(data, map) {
                 weight: 20
               });
   }
-  var heatmap = new google.maps.visualization.HeatmapLayer({
+  globals.heatmap = new google.maps.visualization.HeatmapLayer({
     data: heatmapData,
     radius: 15
   });
-  heatmap.setMap(map);
+  globals.heatmap.setMap(map);
 
 }
 
@@ -227,6 +276,45 @@ var closeAllInfoWindows = function() {
 var getLostPets = function(){
   // Get all the lost pets and draw markers on the map
   $.get('/api/v1/pets', (data) => {
+    window.globals.allpets = data;
+    // console.log(globals.pets);
+    if (!$('#show-map').html()){
+      for (var i=0; i < data.length; i++){
+        addLostPetsMarker({lat:data[i].lat, lng: data[i].lng}, map, data[i].name);
+      }
+    }
+  });
+}
+
+// get all the pet close to user( currently not supported by current api controller)
+var getCloseLostPets = function(){
+  // Get all the lost pets and draw markers on the map
+  $.get('/api/v1/pets',
+    {user_lat: globals.location.lat, user_lng: globals.location.lng},
+    (data) => {
+    window.globals.pets = data;
+    console.log(data)
+
+      for (var i=0; i < data.length; i++){
+        addLostPetsMarker({lat:data[i].lat, lng: data[i].lng}, map, data[i].name);
+      }
+
+  });
+}
+
+// this will show all pets in the view, supported by current api
+var getPetsInView = function(bounds){
+  // Get all the lost pets and draw markers on the map
+  // var bounds = map.getBounds();
+  var ne = bounds.getNorthEast();
+  var sw = bounds.getSouthWest();
+  $.get('/api/v1/pets',
+    {top: ne.lat,
+     bottom: sw.lat,
+     left: sw.lng,
+     right: ne.lng},
+    (data) => {
+    window.globals.pets = data;
     for (var i=0; i < data.length; i++){
 
       addLostPetsMarker({lat:data[i].lat, lng: data[i].lng}, map, data[i].name);
@@ -238,14 +326,28 @@ var getLostPets = function(){
 var getSightingsOfaPet = function(pet_id){
   // Get all the lost pets and draw markers on the map
   $.ajax({
-    url: "/api/v1/pets",
+    url: "/api/v1/sightings",
     type: "get", //send it through get method
     data:{id: pet_id},
     success: function(data) {
+      window.globals.sightings = data;``
       addSightingsMarker(data, map);
     },
     error: function(xhr) {
       alert('No data');
     }
-  })
+
+  });
+}
+
+// Returns the pets with the category given
+// example:
+//  $('#filter_button').on('click', function(){
+//   var pets = getPetsByType(globals.pets, "Dog", map);
+//  });
+function getPetsByType(pets_data, type, map) {
+  var pets = pets_data;
+  return pets.filter(
+      function(data){ return pets.pet_type == type }
+  );
 }
