@@ -8,7 +8,15 @@ class SightingsController < ApplicationController
   end
 
   def new
-    @sighting = Sighting.new
+    if params[:pet_id].present?
+      # render plain: " find pet_id"
+      @pet = Pet.find params[:pet_id]
+      @sighting = Sighting.new
+      @sighting.pet_type = @pet.pet_type
+      @sighting.pet_id = params[:pet_id]
+    else
+      @sighting = Sighting.new
+    end
   end
 
   def create
