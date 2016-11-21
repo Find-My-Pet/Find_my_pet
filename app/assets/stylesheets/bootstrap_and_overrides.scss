@@ -29,6 +29,9 @@ body{
   color: white;
 }
 
+.pink{
+  color: $brand-danger;
+}
 .main-painel{
   background: #e4e4e4;
   color: #959595;
@@ -40,6 +43,7 @@ body{
 
   .btn-primary{
     background: #888686;
+    border-color: #53662b;
     &:hover{
       color: white;
     }
