@@ -30,8 +30,8 @@ $( document ).ready(function() {
   });
   // Get all the lost pets
   getLostPets();
-  // get sightings by pet id
-  getSightingsOfaPet(4);
+
+
 
 
   $('#filter_button').on('click', function(){
@@ -62,14 +62,7 @@ function initMap() {
   // getSightingsOfaPet('-THE-PET-ID-', globals.heatmap);
   //});
 
-  if ($('#show-map').html()) {
-    var slugArr = /(\d+)$/.exec(document.URL);
-    getSightingsOfaPet(slugArr[0]);
-    // myPet = window.globals.pets.filter(function(data){ return window.globals.pets.id == slugArr[0] });
-    // console.log(myPet);
-    // map.panTo({lat: })
 
-  };
 
   // var infoWindow = new google.maps.InfoWindow({map: map});
 
@@ -80,10 +73,25 @@ function initMap() {
 
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-  map.addListener('bounds_changed', function() {
+  var getPetsListeneer = map.addListener('bounds_changed', function() {
     searchBox.setBounds(map.getBounds());
-    getPetsInView(map.getBounds());
+    if (!$('#show-map').html()){
+      getPetsInView(map.getBounds());
+    }
   });
+
+  if ($('#show-map').html()) {
+    var slugArr = /(\d+)$/.exec(document.URL);
+    getSightingsOfaPet(slugArr[0]);
+    markers.forEach(function(marker) {
+      marker.setMap(null);
+    });
+    //google.maps.event.removeListener(getPetsListener);
+    // myPet = window.globals.allpets.filter(function(data){ return window.globals.allpets.id == slugArr[0] });
+    // console.log(myPet.id);
+    // map.panTo({lat: })
+
+  }
 
   searchBox.addListener('places_changed', function() {
          var places = searchBox.getPlaces();
@@ -141,8 +149,20 @@ function initMap() {
             window.globals.location = pos;
             // infoWindow.setPosition(pos);
             // infoWindow.setContent('Location found.');
-            map.setCenter(pos);
-            addMarker(pos, map);
+              if (!$('#show-map').html()){
+                map.setCenter(pos);
+                addMarker(pos, map);
+              } else {
+                var slugArr = /(\d+)$/.exec(document.URL);
+                console.log(slugArr[0]);
+                console.log(window.globals.allpets)
+                var myPet = window.globals.allpets.filter(function(data){ return data.id == slugArr[0] });
+
+                var pos = {lat: myPet[0].lat, lng: myPet[0].lng}
+                map.setCenter(pos);
+                addMarker(pos, map);
+              }
+
             // getCloseLostPets();
             $('#pet_last_seen_at').val(`(${pos.lat}, ${pos.lng})`)
             $('#sighting_last_seen_at').val(`(${pos.lat}, ${pos.lng})`)
@@ -258,9 +278,10 @@ var getLostPets = function(){
   $.get('/api/v1/pets', (data) => {
     window.globals.allpets = data;
     // console.log(globals.pets);
-    for (var i=0; i < data.length; i++){
-<<<<<<< 74a5bc6f9cbc11dc8bd0cb7957a0606a951b1586
-      addLostPetsMarker({lat:data[i].lat, lng: data[i].lng}, map, data[i].name);
+    if (!$('#show-map').html()){
+      for (var i=0; i < data.length; i++){
+        addLostPetsMarker({lat:data[i].lat, lng: data[i].lng}, map, data[i].name);
+      }
     }
   });
 }
@@ -273,9 +294,11 @@ var getCloseLostPets = function(){
     (data) => {
     window.globals.pets = data;
     console.log(data)
-    for (var i=0; i < data.length; i++){
-      addLostPetsMarker({lat:data[i].lat, lng: data[i].lng}, map, data[i].name);
-    }
+
+      for (var i=0; i < data.length; i++){
+        addLostPetsMarker({lat:data[i].lat, lng: data[i].lng}, map, data[i].name);
+      }
+
   });
 }
 
@@ -293,8 +316,7 @@ var getPetsInView = function(bounds){
     (data) => {
     window.globals.pets = data;
     for (var i=0; i < data.length; i++){
-=======
->>>>>>> rebasing from integration
+
       addLostPetsMarker({lat:data[i].lat, lng: data[i].lng}, map, data[i].name);
     }
   });
