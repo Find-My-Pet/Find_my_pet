@@ -114,7 +114,7 @@ function initMap() {
             addMarker(pos, map);
             // getCloseLostPets();
             $('#pet_last_seen_at').val(`(${pos.lat}, ${pos.lng})`)
-            $('#sighting_pet_last_seen_at').val(`(${pos.lat}, ${pos.lng})`)
+            $('#sighting_last_seen_at').val(`(${pos.lat}, ${pos.lng})`);
           }, function() {
             handleLocationError(true, infoWindow, map.getCenter());
           });
@@ -225,7 +225,7 @@ var closeAllInfoWindows = function() {
 var getLostPets = function(){
   // Get all the lost pets and draw markers on the map
   $.get('/api/v1/pets', (data) => {
-    window.globals.pets = data;
+    window.globals.allpets = data;
     // console.log(globals.pets);
     for (var i=0; i < data.length; i++){
       addLostPetsMarker({lat:data[i].lat, lng: data[i].lng}, map, data[i].name);
@@ -285,7 +285,7 @@ var getSightingsOfaPet = function(pet_id){
 }
 
 // Returns the pets with the category given
-// example:   
+// example:
 //  $('#filter_button').on('click', function(){
 //   var pets = getPetsByType(globals.pets, "Dog", map);
 //  });
@@ -295,5 +295,3 @@ function getPetsByType(pets_data, type, map) {
       function(data){ return pets.pet_type == type }
   );
 }
-
-

@@ -59,35 +59,29 @@
 </div>
 
 <script type="text/javascript">
+$(document).ready(function(){
+  getLostPets();
+});
 
 $('li').click(function(){
-  // console.log(this.id)
   var petId = this.id
-  // console.log(window.globals.pets);
-  var petArray = window.globals.pets
-  for (var i = 0; i < window.globals.pets.length; i++) {
-    // var petId = this.id
+  var petArray = window.globals.allpets
+  for (var i = 0; i < window.globals.allpets.length; i++) {
     if (petArray[i].id == petId) {
-      // console.log(petArray[i].id)
       $('#sighting_pet_type').val(petArray[i].pet_type);
       $('#sighting_note').val(`Color: ${petArray[i].color}, Breed: ${petArray[i].breed}`);
     }
   }
 });
-$( document ).ready(function() {
-  getLostPets;
-});
+
 var getLostPets = function(){
   // Get all the lost pets and draw markers on the map
   $.get('/api/v1/pets', (data) => {
-    window.globals.pets = data;
-    // console.log(globals.pets);
+    window.globals.allpets = data;
     for (var i=0; i < data.length; i++){
       addLostPetsMarker({lat:data[i].lat, lng: data[i].lng}, map, data[i].name);
     }
   });
 }
-  //
-  // var allPets = window.globals.pets
-  // console.log(allPets)
+
 </script>
