@@ -68,7 +68,7 @@ table {
 #seeme{
   background: #c8c8c8;
   padding: 25px 0px;
-  margin: 15px 0;
+  margin: 35px 0;
   overflow: hidden;
   @include box-shadow(1px, 1px, 5px, lighten($btn-default-color,40%)) ;
 

@@ -63,3 +63,32 @@ body{
   }
 
 }
+
+.modal-content{
+  background: #e5ebe6;
+
+}
+
+
+.fb, .tw{
+  color: white;
+  i{
+    margin-right: 10px;
+  }
+}
+
+.fb{
+  background: #3B5998;
+  &:hover{
+    background: darken(#3B5998, 10%);
+    color: white;
+  }
+}
+
+.tw{
+  background: #00ACED;
+  &:hover{
+    background: darken(#00ACED, 10%);
+    color: white;
+  }
+}
