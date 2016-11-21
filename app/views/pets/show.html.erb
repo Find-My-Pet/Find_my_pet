@@ -76,8 +76,7 @@
 
 
     <div class="col-md-6">
-      <p><span> Last seen : </span><%= @pet.last_seen_at %></p>
-      <p><%= @pet.last_seen_date.strftime('%b %d %Y') %>
+      <p><span> Last seen on: </span> <%= @pet.last_seen_date.strftime('%b %d %Y') %>
       <%= @pet.last_seen_time.strftime('%I:%M %p') %></p>
       <p><%= @pet.note %></p>
       <div>

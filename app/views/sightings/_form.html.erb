@@ -1,13 +1,17 @@
 <%= simple_form_for @sighting do |f| %>
 <div class="col-md-6">
-   <%= f.input :pet_type, collection: @pet_type %>
-   <br>
-   <%= f.file_field :image %>
+  <div class="pet-selected">
+    <%=f.input :pet_type, collection: @pet_type, label: 'Specie' %>
+  </div>
+  <div class="pet-other" style="display: none;">
+    <%=f.input :pet_type, placeholder: 'Please type the specie of your pet', label: 'Specie' %>
+  </div>
    <%=f.input :note %>
    <%=f.input :last_seen_at %>
  <div class="form-inline">
    <%=f.input :date_time, as: :date, order: [:day, :month, :year] %>
- </div>
+ </div><br>
+ <%= f.file_field :image %><br>
  </div>
  <div class="col-md-6">
    <div>
