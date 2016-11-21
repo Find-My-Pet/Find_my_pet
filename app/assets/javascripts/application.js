@@ -17,6 +17,19 @@
 //= require_tree .
 
 $(function () {
+  $('.moreinfo-btn').click(function(event){
+    event.preventDefault();
+    var parent = $( event.target ).closest('.main-list').find('.moreinfo');
+
+
+      $(this).text(function(i, text){
+          return text === "More info" ? "Less info" : "More info";
+      })
+
+
+        $(parent).slideToggle();
+
+  });
 
   $('.pet-selected').change(function() {
     var petSelected = $('.pet-selected :selected').val()
