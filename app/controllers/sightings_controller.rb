@@ -25,7 +25,7 @@ class SightingsController < ApplicationController
       if @sighting.pet_id.present?
       SightingsMailer.notify_pet_owner(@sighting).deliver_now
       end
-      redirect_to sighting_path(@sighting)
+      redirect_to pets_path, notice: 'Thanks for your colaboration! Pet owners will be notified. Have You seen any of those pets?'
     else
       render :new
     end
