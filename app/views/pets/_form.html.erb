@@ -3,10 +3,10 @@
 <%= simple_form_for  @pet  do |f| %>
   <div class="col-md-6">
     <div class="pet-selected">
-      <%=f.input :pet_type, collection: @pet_type, label: 'Specie' %>
+      <%=f.input :pet_type, collection: @pet_type, label: 'Species' %>
     </div>
     <div class="pet-other" style="display: none;">
-      <%=f.input :pet_type, placeholder: 'Please type the specie of your pet', label: 'Specie'%>
+      <%=f.input :pet_type, placeholder: 'Please type the specie of your pet', label: 'Species', input_html: { id: 'species' } %>
     </div>
     <%=f.input :breed, placeholder: "If You don't know just type 'Other'" %>
     <%=f.input :color %>
@@ -14,7 +14,7 @@
     <%=f.input :name %>
     <%=f.input :gender, collection: @gender %>
     <%=f.input :age %>
-    <%f.input :last_seen_at %>
+    <%=f.hidden_field :last_seen_at %>
     <div class="form-inline">
       <%=f.input :last_seen_date, as: :date, order: [:day, :month, :year] %>
       <%=f.input :last_seen_time, as: :time, only: [:hour, :minute] %>

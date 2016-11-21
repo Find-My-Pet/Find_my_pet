@@ -1,10 +1,10 @@
 <%= simple_form_for @sighting do |f| %>
 <div class="col-md-6">
   <div class="pet-selected">
-    <%=f.input :pet_type, collection: @pet_type, label: 'Specie' %>
+    <%=f.input :pet_type, collection: @pet_type, label: 'Species' %>
   </div>
   <div class="pet-other" style="display: none;">
-    <%=f.input :pet_type, placeholder: 'Please type the specie of your pet', label: 'Specie' %>
+    <%=f.input :pet_type, placeholder: 'Please type the specie of your pet', label: 'Species' %>
   </div>
    <%= f.hidden_field :pet_id %>
    <%=f.input :note %>
