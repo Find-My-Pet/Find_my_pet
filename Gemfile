@@ -37,6 +37,7 @@ gem 'omniauth-facebook'
 gem 'twitter'
 gem 'koala'
 gem "fog-aws"
+gem 'rails_12factor', group: :production
 
 gem 'cancancan'
 gem 'simple_form'
