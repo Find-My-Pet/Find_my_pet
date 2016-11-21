@@ -1,6 +1,8 @@
 <h1>All Lost Pets</h1>
 
+<ul>
 <% @pets.each do |p|%>
+<li style="list-style: none" id="<%= p.id %>">
   <h3><%=link_to p.name, pet_path(p) %></h3>
   <p><%=p.breed%></p>
   <p><%=p.color%></p>
@@ -10,8 +12,10 @@
     <%end%>
   </section>
   <a id="choose-sighting">Did you see this pet?</a>
+</li>
   <hr>
 <%end%>
+</ul>
 
 <%= link_to 'Not one of those? Make a new spot!', new_sighting_path %>
 <%= form_for @sighting do |f| %>
@@ -30,7 +34,7 @@
  </div>
  <div>
    <%= f.label :note %>
-    <%= f.text_field :note %>
+    <%= f.text_area :note %>
  </div>
 
  <div>
@@ -49,17 +53,41 @@
  <%= f.submit %>
 <% end %>
 
-<input type="button" name="get_data" id="get_data" value="get data">
-
 <div class="col-md-6">
   <input id="pac-input" class="controls" type="text" placeholder="Search Box">
   <div id="map" style='width: 100%; height: 400px;'></div>
 </div>
 
 <script type="text/javascript">
-$('a#choose-sighting').click(function(){
-  console.log('')
+
+$('li').click(function(){
+  // console.log(this.id)
+  var petId = this.id
+  // console.log(window.globals.pets);
+  var petArray = window.globals.pets
+  for (var i = 0; i < window.globals.pets.length; i++) {
+    // var petId = this.id
+    if (petArray[i].id == petId) {
+      // console.log(petArray[i].id)
+      $('#sighting_pet_type').val(petArray[i].pet_type);
+      $('#sighting_note').val(`Color: ${petArray[i].color}, Breed: ${petArray[i].breed}`);
+    }
+  }
 });
+$( document ).ready(function() {
+  getLostPets;
+});
+var getLostPets = function(){
+  // Get all the lost pets and draw markers on the map
+  $.get('/api/v1/pets', (data) => {
+    window.globals.pets = data;
+    // console.log(globals.pets);
+    for (var i=0; i < data.length; i++){
+      addLostPetsMarker({lat:data[i].lat, lng: data[i].lng}, map, data[i].name);
+    }
+  });
+}
+  //
   // var allPets = window.globals.pets
   // console.log(allPets)
 </script>

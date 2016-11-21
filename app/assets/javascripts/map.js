@@ -14,7 +14,7 @@ const info =
 
 var mapstyle = [
 {"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"administrative.country","elementType":"labels.text.fill","stylers":[{"hue":"#ff0000"}]},{"featureType":"administrative.locality","elementType":"labels.text.fill","stylers":[{"color":"#ff0000"}]},{"featureType":"administrative.land_parcel","elementType":"labels.text.fill","stylers":[{"color":"#ff0000"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road","elementType":"labels.text.fill","stylers":[{"hue":"#ff0000"}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"weight":"0.90"}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#ababab"}]},{"featureType":"road.arterial","elementType":"geometry.stroke","stylers":[{"weight":"0.30"},{"visibility":"off"},{"hue":"#ff0000"}]},{"featureType":"road.arterial","elementType":"labels.text.fill","stylers":[{"color":"#ff0000"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"road.local","elementType":"geometry.fill","stylers":[{"color":"#ff0000"},{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#838383"},{"visibility":"on"}]}
-]
+];
 
 $( document ).ready(function() {
   var styledMap = new google.maps.StyledMapType(mapstyle, {name: "styled map"});
@@ -28,8 +28,8 @@ $( document ).ready(function() {
   getLostPets();
   // get sightings by pet id
   getSightingsOfaPet(4);
-  
-  
+
+
   $('#filter_button').on('click', function(){
     filterPetsByType(globals.pets, "Dog");
   });
@@ -48,9 +48,10 @@ function initMap() {
     closeAllInfoWindows();
     addMarker(event.latLng, map);
     $('#pet_last_seen_at').val(event.latLng)
+    $('#sighting_last_seen_at').val(event.latLng)
   });
 
-  var infoWindow = new google.maps.InfoWindow({map: map});
+  // var infoWindow = new google.maps.InfoWindow({map: map});
   // Create the search box and link it to the UI element.
   var input = document.getElementById('pac-input');
   var searchBox = new google.maps.places.SearchBox(input);
@@ -120,6 +121,7 @@ function initMap() {
             map.setCenter(pos);
             addMarker(pos, map);
             $('#pet_last_seen_at').val(`(${pos.lat}, ${pos.lng})`)
+            $('#sighting_pet_last_seen_at').val(`(${pos.lat}, ${pos.lng})`)
           }, function() {
             handleLocationError(true, infoWindow, map.getCenter());
           });
@@ -231,7 +233,7 @@ var getLostPets = function(){
   // Get all the lost pets and draw markers on the map
   $.get('/api/v1/pets', (data) => {
     window.globals.pets = data;
-    console.log(globals.pets);
+    // console.log(globals.pets);
     for (var i=0; i < data.length; i++){
       addLostPetsMarker({lat:data[i].lat, lng: data[i].lng}, map, data[i].name);
     }
@@ -253,7 +255,7 @@ var getSightingsOfaPet = function(pet_id){
     error: function(xhr) {
       alert('No data');
     }
-  })f
+  })
 }
 
 
