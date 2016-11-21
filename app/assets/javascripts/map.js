@@ -31,14 +31,6 @@ $( document ).ready(function() {
   // Get all the lost pets
   getLostPets();
 
-
-
-
-  $('#filter_button').on('click', function(){
-    filterPetsByType(globals.pets, "Dog");
-  });
-
-
 });
 
 function initMap() {
