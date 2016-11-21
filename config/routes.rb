@@ -20,7 +20,6 @@ resources :pets, shallow: true do
 
   get '/auth/twitter', as: :sign_in_with_twitter
   get '/auth/twitter/callback/' => 'callbacks#twitter'
-  get '/auth/facebook/callbacks/' => 'callbacks#facebook'
 
 
   namespace :api, defaults: {format: :json} do

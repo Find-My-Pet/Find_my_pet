@@ -35,6 +35,8 @@ gem 'mini_magick'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'twitter'
+gem 'koala'
+
 gem 'cancancan'
 gem 'simple_form'
 
@@ -42,7 +44,6 @@ gem 'faker'
 gem 'interactive_editor'
 gem 'awesome_print'
 gem 'hirb'
-gem 'simple_form'
 
 # Bootstrap
 gem 'bootstrap-sass', '~> 3.3.6'
