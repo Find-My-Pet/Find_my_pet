@@ -9,7 +9,6 @@ class PetsController < ApplicationController
   end
 
   def create
-    # binding.pry
     @pet = Pet.new pet_params
     @pet.user = current_user
     if @pet.save
@@ -56,6 +55,7 @@ class PetsController < ApplicationController
   end
 
   def print
+    @pet = Pet.find params[:pet_id]
     render layout: "print"
   end
 
