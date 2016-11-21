@@ -1,0 +1,13 @@
+<%= button_to 'Sign Up With Facebook', sign_in_with_facebook_path, class:"btn btn-default", method: :get %>
+<p>or</p>
+<%= button_to 'Sign Up With Twitter', sign_in_with_twitter_path, class:"btn btn-default", method: :get %>
+<p>Or with Email</p>
+<%= simple_form_for User.new do |f| %>
+    <%= f.input :first_name %>
+    <%= f.input :last_name %>
+    <%= f.input :email %>
+    <%= f.input :password %>
+</div>
+<div class="modal-footer">
+    <%= f.submit %>
+<% end %>

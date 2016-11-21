@@ -15,7 +15,11 @@
           </div>
 
           <div class="col-md-5">
-            <a href="#" class="panel lostpet">
+          <% if user_signed_in? %>
+            <a href="<%= new_pet_path %>" class="panel lostpet">
+          <% else %>
+            <a data-toggle="modal" data-target="#SignIn" class="panel lostpet">
+          <% end %>
               <h2><strong>Lost </strong>a Pet</h2>
               <img src="/assets/panel-image-2.png" alt="" />
             </a>
@@ -81,3 +85,5 @@
   </div>
 
 </div>
+
+<%= render 'shared/sign_in' %>

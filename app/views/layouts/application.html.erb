@@ -58,8 +58,17 @@
     </div>
   </nav>
 
+<% if flash[:alert].present? %>
+  <div class="alert alert-danger">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
 
-
+<% if flash[:notice].present? %>
+  <div class="alert alert-success">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
     <%= yield %>
 
 <%= render 'shared/sign_up' %>
