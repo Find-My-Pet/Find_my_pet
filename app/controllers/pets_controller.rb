@@ -1,8 +1,8 @@
 class PetsController < ApplicationController
-  # before_action :authenticate_user, except: [:index, :show]
-  # before_action :authorize_access, only: [:edit, :update, :destroy]
+  before_action :authenticate_user, except: [:index, :show]
   before_action :find_pet, only: [:edit, :update, :destroy, :show]
   before_action :set_defaults, only: [:edit, :new]
+  before_action :authorize_access, only: [:edit, :update, :destroy]
 
   def new
     @pet = Pet.new
@@ -23,6 +23,7 @@ class PetsController < ApplicationController
   end
 
   def index
+    @sighting = Sighting.new
     @pets = Pet.order(created_at: :desc)
   end
 
@@ -104,12 +105,12 @@ class PetsController < ApplicationController
   end
 
   def authorize_access
-    unless can? :manage, @pet
+    unless can?(:manage, @pet)
       redirect_to home_path, alert: 'access denied'
     end
   end
 
   def social_message
-    "#{(@pet.found ? 'Found my pet' : 'Please help find my pet')} #{@pet.name}, it's a #{@pet.color} #{@pet.pet_type}, #{@pet.breed}, #{@pet.gender}, #{@pet.age}. #FindMyPet"
+    "#{(@pet.found ? 'Found my pet' : 'Please help find my pet')} #{@pet.name}, it's a #{@pet.color} #{@pet.pet_type}, #{@pet.breed}, #{@pet.gender}, age #{@pet.age}. #FindMyPet"
   end
 end

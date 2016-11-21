@@ -24,6 +24,7 @@ $(function () {
       $('.pet-other').slideDown(800);
     } else {
       $('.pet-other').slideUp(800);
+      $('#dingdong').val(petSelected);
     }
   })
 

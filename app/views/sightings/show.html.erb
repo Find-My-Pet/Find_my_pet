@@ -14,9 +14,6 @@
 <div>
 Last Seen: <%= @sighting.date_time %>
 </div>
-<div>
-Location: <%= @sighting.last_seen_at %>
-</div>
 <h2>Contact Info</h2>
 <div>
 <%= @sighting.name %>
@@ -25,12 +22,12 @@ Location: <%= @sighting.last_seen_at %>
 <%= @sighting.contact %>
 </div>
 <%# if can? :manage, @sighting %>
-<%=link_to edit_sighting_path(@sighting) do%>
+<%= link_to edit_sighting_path(@sighting) do %>
 <span class="glyphicon glyphicon-pencil"></span>
-<%end%>
-<%=link_to sighting_path(@sighting), method: :delete do %>
+<% end %>
+<%= link_to sighting_path(@sighting), method: :delete do %>
 <span class="glyphicon glyphicon-trash"></span>
-<%end%>
+<% end %>
 <%#end%>
 
 </div>

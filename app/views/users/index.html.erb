@@ -1,19 +1,24 @@
 <h1>All Your Reports</h1>
 
-<% @user.pets.each do |pet| %>
-<div class="col-xs-6 col-sm-6 col-md-3">
-  <div class="thumbnail">
-    <% if pet.image.present?%>
-      <%= image_tag pet.image[0].url(:large), class: 'image-index image-circle'%>
-    <%else%>
-     <img src="assets/image_dog_03@2x.png" alt="" />
-    <%end%>
+<%if @user.pets.count == 0 %>
+  <h2>It seems like you never lost your pets!</h2>
+  <h2> Good Job!</h2>
+<%else%>
+  <% @user.pets.each do |pet| %>
+  <div class="col-xs-6 col-sm-6 col-md-3">
+    <div class="thumbnail">
+      <% if pet.image.present?%>
+        <%= image_tag pet.image[0].url(:large), class: 'image-index image-circle'%>
+      <%else%>
+       <img src="assets/image_dog_03@2x.png" alt="" />
+      <%end%>
 
-    <div class="caption">
-      <h3><%=link_to pet.name, pet_path(pet) %></h3>
-      <p><%=pet.breed%></p>
-      <p><%=pet.color%></p>
+      <div class="caption">
+        <h3><%=link_to pet.name, pet_path(pet) %></h3>
+        <p><%=pet.breed%></p>
+        <p><%=pet.color%></p>
+      </div>
     </div>
   </div>
-</div>
+  <% end %>
 <% end %>
