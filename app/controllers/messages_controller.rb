@@ -7,6 +7,7 @@ class MessagesController < ApplicationController
     @message.pet = @pet
     respond_to do |format|
       if @message.save
+        MessagesMailer.message_pet_owner(@message).deliver_now
         format.js {render :create_success}
         format.html {redirect_to :back}
       else

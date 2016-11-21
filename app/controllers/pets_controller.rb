@@ -1,4 +1,6 @@
 class PetsController < ApplicationController
+  # before_action :authenticate_user, except: [:index, :show]
+  # before_action :authorize_access, only: [:edit, :update, :destroy]
   before_action :find_pet, only: [:edit, :update, :destroy, :show]
   before_action :set_defaults, only: [:edit, :new]
 
@@ -93,4 +95,11 @@ class PetsController < ApplicationController
   def find_pet
     @pet = Pet.find params[:id]
   end
+
+  def authorize_access
+    unless can? :manage, @pet
+      redirect_to home_path, alert: 'access denied'
+    end
+  end
+
 end
