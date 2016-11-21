@@ -44,7 +44,7 @@
             <li>
               <p class="navbar-text">Hello <%= current_user.first_name %></p>
             </li>
-            <li> <%= link_to 'Your Pet Page', pet_path(current_user.pets) %>
+            <li> <%= link_to 'Your Reports', users_path %>
             <li>
               <%= button_to 'Sign out',
                 sessions_path,
