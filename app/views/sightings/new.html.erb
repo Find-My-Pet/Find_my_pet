@@ -3,7 +3,7 @@
 <% if @sighting.pet_id.present? %>
   <h2><%= @sighting.pet.name %></h2>
   <% if @sighting.pet.image.present? %>
-    
+    <%= image_tag @sighting.pet.image.first.url, class: 'question-thumbnail' %>
   <%end %>
 <%end %>
 

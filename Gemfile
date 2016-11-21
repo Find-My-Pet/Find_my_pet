@@ -43,7 +43,6 @@ gem 'simple_form'
 gem 'faker'
 gem 'interactive_editor'
 gem 'awesome_print'
-gem 'hirb'
 
 # Bootstrap
 gem 'bootstrap-sass', '~> 3.3.6'
