@@ -8,17 +8,29 @@ class SightingsController < ApplicationController
   end
 
   def new
-    @sighting = Sighting.new
+    if params[:pet_id].present?
+      # render plain: " find pet_id"
+      @pet = Pet.find params[:pet_id]
+      @sighting = Sighting.new
+      @sighting.pet_type = @pet.pet_type
+      @sighting.pet_id = params[:pet_id]
+    else
+      @sighting = Sighting.new
+    end
   end
 
   def create
     @sighting=Sighting.new sighting_params
-    if params[:pet_id].present?
-      @sighting.pet_id = params[:pet_id]
-    else
-      @sighting.pet_id = nil
-    end
+    # if params[:pet_id].present?
+      @sighting.pet_id = 1
+      # params[:pet_id]
+    # else
+    #   @sighting.pet_id = nil
+    # end
     if @sighting.save
+      if @sighting.pet_id.present?
+      SightingsMailer.notify_pet_owner(@sighting).deliver_now
+      end
       # redirect_to post_path(@post)
       redirect_to sighting_path(@sighting)
     else

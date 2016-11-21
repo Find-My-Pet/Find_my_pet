@@ -1,4 +1,6 @@
 class PetsController < ApplicationController
+  # before_action :authenticate_user, except: [:index, :show]
+  # before_action :authorize_access, only: [:edit, :update, :destroy]
   before_action :find_pet, only: [:edit, :update, :destroy, :show]
   before_action :set_defaults, only: [:edit, :new]
 
@@ -30,6 +32,17 @@ class PetsController < ApplicationController
 
   def update
     if @pet.update pet_params
+      if @pet.tweet_this
+        client = Twitter::REST::Client.new do |config|
+          config.consumer_key        = ENV['TWITTER_CONSUMER_KEY']
+          config.consumer_secret     = ENV['TWITTER_CONSUMER_SECRET']
+          config.access_token        = current_user.oauth_token
+          config.access_token_secret = current_user.oauth_secret
+        end
+        message = "#{(@pet.found ? 'Found my pet' : 'Please help find my pet')} #{@pet.name}, it's a #{@pet.color} #{@pet.pet_type}, #{@pet.breed}, #{@pet.gender}, #{@pet.age}. #FindMyPet"
+        client.update(message)
+      elsif @pet.share_on_facebook
+      end
       redirect_to pet_path(@pet)
     else
       render :edit
@@ -70,6 +83,8 @@ class PetsController < ApplicationController
                                  :lat,
                                  :long,
                                  :found,
+                                 :tweet_this,
+                                 :share_on_facebook,
                                  :note,
                                  {image: []},
                                  :last_seen_date,
@@ -80,4 +95,11 @@ class PetsController < ApplicationController
   def find_pet
     @pet = Pet.find params[:id]
   end
+
+  def authorize_access
+    unless can? :manage, @pet
+      redirect_to home_path, alert: 'access denied'
+    end
+  end
+
 end

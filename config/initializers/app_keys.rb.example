@@ -2,3 +2,5 @@ ENV['FACEBOOK_KEY'] = '??'
 ENV['FACEBOOK_SECRET'] = '??'
 ENV['TWITTER_KEY'] = ''
 ENV['TWITTER_SECRET'] = ''
+ENV["email_user_name"] = "PUT USER NAME HERE"
+ENV["email_password"]  = "PUT PASSWORD HERE"
