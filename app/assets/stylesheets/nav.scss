@@ -1,6 +1,10 @@
 @import "mixins";
 @import "variables";
 
+
+@import url('https://fonts.googleapis.com/css?family=Varela+Round');
+
+
 .navbar-brand{
   overflow: hidden;
   height: inherit;
@@ -33,11 +37,55 @@
 
   a{
     transition: all 1s;
-    border-bottom: solid 3px $navbar-default-bg;
+    font-family: 'Varela Round', sans-serif;
+    font-size: 15px;
+    // border-bottom: solid 3px $navbar-default-bg;
 
     &:hover{
       border-bottom: solid 3px $brand-info;
 
+    }
+
+    .glyphicon {
+      margin-right: 12px;
+      top: 0px;
+      font-size: 12px;
+    }
+
+  }
+
+  .dropdown-menu{
+    &:hover{
+      border: none;
+    }
+
+    a{
+      &:hover{
+        border: none;
+      }
+    }
+  }
+
+
+
+.dropdown-toggle{
+  &:hover{
+    border: none;
+  }
+}
+
+
+
+  .btn-default{
+    padding: 5px 12px;
+    margin: 10px;
+    background: none;
+    border: none;
+
+    .glyphicon {
+      margin-right: 9px;
+      top: 0px;
+      font-size: 12px;
     }
   }
 
