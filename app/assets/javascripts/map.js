@@ -113,7 +113,6 @@ function initMap() {
             map.setCenter(pos);
             addMarker(pos, map);
             // getCloseLostPets();
-            getPetsInView(map);
             $('#pet_last_seen_at').val(`(${pos.lat}, ${pos.lng})`)
             $('#sighting_pet_last_seen_at').val(`(${pos.lat}, ${pos.lng})`)
           }, function() {
