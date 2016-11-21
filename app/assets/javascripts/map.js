@@ -319,7 +319,4 @@ function getPetsByType(pets_data, type, map) {
   return pets.filter(
       function(data){ return pets.pet_type == type }
   );
-
-  })
-
 }
