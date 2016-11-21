@@ -53,10 +53,30 @@ table {
   @include box-shadow(2px, 2px, 5px, lighten($btn-default-color,30%)) ;
   background: rgba(lighten($btn-default-color, 70%), 0.6);
   overflow: hidden;
-
   span{
 
   }
+}
+
+.footer{
+  padding: 29px;
+  background: #09274b;
+
+
+
+  ul{
+    padding-top: 20px;
+    li{
+      list-style:none;
+    }
+
+    a{
+      color:white;
+      padding: 5px;
+      display: block;
+    }
+  }
+
 }
 
 .moreinfo{
