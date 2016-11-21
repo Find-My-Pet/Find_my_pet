@@ -28,3 +28,34 @@ body{
 .btn-primary{
   color: white;
 }
+
+.main-painel{
+  background: #e4e4e4;
+  color: #959595;
+  font-size: 11px;
+
+  .btn-default{
+    background: none;
+  }
+
+  .btn-primary{
+    background: #888686;
+    &:hover{
+      color: white;
+    }
+  }
+
+  strong{
+    color: black;
+    font-size: 17px;
+    font-weight: normal;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  h3{
+    color: #1b81e9;
+    margin-bottom: 20px;
+  }
+
+}

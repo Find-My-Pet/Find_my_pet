@@ -11,8 +11,12 @@
   overflow: hidden;
   .img-circle{
     @include box-shadow(2px, 2px, 5px, lighten($btn-default-color,30%)) ;
+    width: 100%;
+    border: solid 1px #9b9b9b;
   }
 }
+
+
 
 .tbn {
   img{
@@ -31,6 +35,13 @@
     margin-bottom: 30px;
 
   }
+}
+
+.main-list{
+  padding: 7px 0 ;
+  margin: 2px 0;
+  overflow: hidden;
+  border-bottom: solid 1px #cdcdcd;
 }
 
 table {
@@ -52,4 +63,13 @@ table {
   border-bottom: solid 2px lighten($btn-default-color, 70%);
   display:block;
   margin: 10px 0 ;
+}
+
+#seeme{
+  background: #c8c8c8;
+  padding: 25px 0px;
+  margin: 15px 0;
+  overflow: hidden;
+  @include box-shadow(1px, 1px, 5px, lighten($btn-default-color,40%)) ;
+
 }
