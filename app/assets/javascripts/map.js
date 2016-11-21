@@ -24,14 +24,6 @@ $( document ).ready(function() {
   map.mapTypes.set("map_style", styledMap);
   map.setMapTypeId("map_style");
   window.globals = {};
-  // Get all the lost pets
-  // getLostPets();
-  // get sightings by pet id
-  
- $('#filter_button').on('click', function(){
-  var pets = getPetsByType(globals.pets, "Dog", map);
- });
-
 });
 
 function initMap() {
@@ -240,6 +232,7 @@ var getLostPets = function(){
   });
 }
 
+// get all the pet close to user( currently not supported by current api controller)
 var getCloseLostPets = function(){
   // Get all the lost pets and draw markers on the map
   $.get('/api/v1/pets',
@@ -253,6 +246,7 @@ var getCloseLostPets = function(){
   });
 }
 
+// this will show all pets in the view, supported by current api
 var getPetsInView = function(bounds){
   // Get all the lost pets and draw markers on the map
   // var bounds = map.getBounds();
@@ -270,7 +264,6 @@ var getPetsInView = function(bounds){
     }
   });
 }
-
 
 // Get all the sightings by pet id
 var getSightingsOfaPet = function(pet_id){
