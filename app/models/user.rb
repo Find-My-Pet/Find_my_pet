@@ -21,7 +21,7 @@ class User < ApplicationRecord
     uid.present? && provider == 'facebook'
   end
 
-  def self.update_from_oauth(oauth_data)
+  def update_from_oauth(oauth_data)
     update provider: oauth_data['provider'],
            uid: oauth_data['uid'],
            oauth_token: oauth_data['credentials']['token'],
