@@ -2,21 +2,13 @@
 <div class="row">
   <div class="container">
 
-<h1>All Sightings</h1>
-<%# @sightings.each do |f|%>
-<%#= image_tag f.image.url(:thumb), class: 'question-thumbnail' if f.image.present? %>
-<!-- <%#=link_to f.pet_type, sighting_path(f)%><br> -->
-<!-- Last seen: <%#= f.date_time %> at <%#= f.last_seen_at   %> -->
-<!-- <hr> -->
-<%# end %>
 
-
-</div>
-
-
+<h1 class="text-center">All Sightings <i class="fa fa-chevron-down" aria-hidden="true"></i> </br></h1>
 
 <div id ='sightings-map' style='width: 800px;'>
   <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-  <div id="map" style='width: 500px; height: 400px;'></div>
+  <div id="map" style='width: 90vw; height: 400px;margin-bottom:30px'></div>
+
+</div>
 
 </div>
