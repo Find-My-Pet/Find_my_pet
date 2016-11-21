@@ -146,11 +146,9 @@ function initMap() {
             // infoWindow.setContent('Location found.');
               if (!$('#show-map').html() && !$('#sightings-map').html()){
                 map.setCenter(pos);
-                addMarker(pos, map);
+                // addMarker(pos, map);
               } else {
                 var slugArr = /(\d+)$/.exec(document.URL);
-                console.log(slugArr[0]);
-                console.log(window.globals.allpets)
                 var myPet = window.globals.allpets.filter(function(data){ return data.id == slugArr[0] });
 
                 var pos = {lat: myPet[0].lat, lng: myPet[0].lng}
@@ -230,10 +228,10 @@ function addMarker(location, map, label) {
 }
 
 // Add a marker on lost pet
-function addLostPetsMarker(location, map, label) {
+function addLostPetsMarker(location, map) {
   var marker = new google.maps.Marker({
     position: location,
-    label: label,
+    // label: label,
     map: map,
     icon: 'assets/icon_report_lost_red.png'
   });
@@ -272,9 +270,7 @@ function addSightingsMarker(data, map) {
 
 
 var removeLastMarker = function() {
-	for (var i = 0; i < markers.length - 1; i++) {
-  	markers[i].setMap(null)
-  }
+  markers[markers.length - 2].setMap(null)
 }
 
 var closeAllInfoWindows = function() {
