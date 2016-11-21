@@ -73,9 +73,9 @@ function initMap() {
 
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-  var getPetsListeneer = map.addListener('bounds_changed', function() {
+  var getPetsListener = map.addListener('bounds_changed', function() {
     searchBox.setBounds(map.getBounds());
-    if (!$('#show-map').html()){
+    if (!$('#show-map').html() && !$('#sightings-map').html() ){
       getPetsInView(map.getBounds());
     }
   });
@@ -92,6 +92,7 @@ function initMap() {
     // map.panTo({lat: })
 
   }
+
 
   searchBox.addListener('places_changed', function() {
          var places = searchBox.getPlaces();
@@ -139,6 +140,8 @@ function initMap() {
          map.fitBounds(bounds);
        });
 
+
+
         // Try HTML5 geolocation.
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
@@ -149,7 +152,7 @@ function initMap() {
             window.globals.location = pos;
             // infoWindow.setPosition(pos);
             // infoWindow.setContent('Location found.');
-              if (!$('#show-map').html()){
+              if (!$('#show-map').html() && !$('#sightings-map').html()){
                 map.setCenter(pos);
                 addMarker(pos, map);
               } else {
@@ -239,27 +242,42 @@ function addLostPetsMarker(location, map, label) {
   var marker = new google.maps.Marker({
     position: location,
     label: label,
-    map: map
+    map: map,
+    icon: 'assets/icon_report_lost_red.png'
   });
   markers.push(marker);
 }
 
 // Add a marker on sighting
 function addSightingsMarker(data, map) {
-  var heatmapData = [];
-  for (var i=0; i < data.length; i++){
-    heatmapData.push({
-                location: new google.maps.LatLng(data[i].lat, data[i].lng),
-                weight: 20
-              });
-  }
-  globals.heatmap = new google.maps.visualization.HeatmapLayer({
-    data: heatmapData,
-    radius: 15
-  });
-  globals.heatmap.setMap(map);
+  if ($('#show-map').html()){
 
+    var heatmapData = [];
+    for (var i=0; i < data.length; i++){
+      heatmapData.push({
+                  location: new google.maps.LatLng(data[i].lat, data[i].lng),
+                  weight: 20
+                });
+    }
+    globals.heatmap = new google.maps.visualization.HeatmapLayer({
+      data: heatmapData,
+      radius: 15
+    });
+    globals.heatmap.setMap(map);
+  } else if ($('#sightings-map').html()) {
+    for (var i=0; i < data.length; i++){
+    console.log('here');
+      var marker = new google.maps.Marker({
+      position: {lat:data[i].lat, lng:data[i].lng},
+      map: map,
+      icon: 'assets/icon_report_found_green_active.png'
+      });
+      markers.push(marker);
+    }
+  }
 }
+
+
 
 var removeLastMarker = function() {
 	for (var i = 0; i < markers.length - 1; i++) {
@@ -278,9 +296,15 @@ var getLostPets = function(){
   $.get('/api/v1/pets', (data) => {
     window.globals.allpets = data;
     // console.log(globals.pets);
-    if (!$('#show-map').html()){
+    if (!$('#show-map').html() && !$('#sightings-map').html()){
       for (var i=0; i < data.length; i++){
         addLostPetsMarker({lat:data[i].lat, lng: data[i].lng}, map, data[i].name);
+      }
+    }
+    if ($('#sightings-map').html()){
+      console.log(window.globals.allpets);
+      for(var i = 0; i<window.globals.allpets.length; i++) {
+        getSightingsOfaPet(window.globals.allpets[i].id);
       }
     }
   });
