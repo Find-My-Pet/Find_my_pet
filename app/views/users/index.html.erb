@@ -1,7 +1,8 @@
 <h1>All Your Reports</h1>
 
 <%if @user.pets.count == 0 %>
-  <h2>It seems like you never lost your pets! Good Job!</h2>
+  <h2>It seems like you never lost your pets!</h2>
+  <h2> Good Job!</h2>
 <%else%>
   <% @user.pets.each do |pet| %>
   <div class="col-xs-6 col-sm-6 col-md-3">
