@@ -1,0 +1,11 @@
+
+  <%= form_for [@pet, @message], remote: true  do |m| %>
+    <div class="form-group col-md-12">
+      <div> <%= m.label :Message%> </div>
+        <div> <%= m.text_area :body%> </div>
+    </div>
+    <div class="form-group col-md-12">
+      <%= m.submit class: 'btn btn-primary' %>
+    </div>
+  <%end%>
+</div>

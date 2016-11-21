@@ -1,0 +1,16 @@
+<div class="col-md-12" id="<%= dom_id(message)%>">
+  <div class="row">
+    <div>
+      <%= message.body %>
+    </div>
+
+    <div>
+      <%# if (can? :manage, @message) || (can? :delete, message) %>
+        <%= link_to message_path(message), method: :delete, remote: true,  data: { confirm: 'Are you sure?'}, class: 'pull-right' do %>
+          <span class="glyphicon glyphicon-trash"></span>
+        <%end%>
+      <%#end%>
+    </div>
+  </div>
+  <hr>
+</div>

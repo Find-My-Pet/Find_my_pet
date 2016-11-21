@@ -1,8 +1,14 @@
 @import "mixins";
 @import "variables";
 
+@import url('https://fonts.googleapis.com/css?family=Oswald');
+
+h1, h2, h3{
+  font-family: 'Oswald', sans-serif;
+}
+
 .main-hero{
-  padding: 90px 0;
+  padding: 90px 0 0 0 ;;
   overflow: hidden;
 
   .panel{
@@ -13,6 +19,8 @@
     position: relative;
     display: block;
     transition: all .5s;
+    font-family: 'Oswald', sans-serif;
+    margin-bottom: 100px;
     &:hover{
       text-decoration: none;
       background: $navbar-default-bg;
@@ -21,10 +29,25 @@
 
     img{
       position: absolute;
-      bottom: -92px;
+      bottom: -105px;
       left: -16px;
       z-index: 2;
       width: 100%;
+    }
+
+    &.lostpet{
+
+      h2{
+        margin-left: 149px;
+        margin-top: 15px;
+
+      }
+
+      img{
+        bottom: -123px;
+        width: 76%;
+        left: -37px;
+      }
     }
 
     h2{
@@ -33,6 +56,7 @@
       font-size: 49px;
       letter-spacing: 2px;
       font-weight: normal;
+      // margin-top: 5px;
       strong{
         border-bottom: solid 2px;
         font-weight: normal;

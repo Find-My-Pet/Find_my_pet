@@ -1,0 +1,15 @@
+<h1>WANTED</h1>
+
+<%= image_tag @pet.image[0].url(:large)%>
+<ul>
+  <li><%= @pet.size %></li>
+  <li><%= @pet.color %></li>
+  <li>
+    <%#if @pet.pet_type == 'Other'%>
+      <%#= @pet.pet_type %>
+    <%#else%>
+      <%#= @pet.breed %>
+    <%#end%>
+  </li>
+</ul>
+<h3><%= @pet.note %></h3>

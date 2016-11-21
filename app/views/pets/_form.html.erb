@@ -2,8 +2,13 @@
 
 <%= simple_form_for  @pet  do |f| %>
   <div class="col-md-6">
-    <%=f.input :pet_type, collection: @pet_type %>
-    <%=f.input :breed %>
+    <div class="pet-selected">
+      <%=f.input :pet_type, collection: @pet_type %>
+    </div>
+    <div class="pet-other" style="display: none;">
+      <%=f.input :pet_type, placeholder: 'Please type the specie of your pet'%>
+    </div>
+    <%=f.input :breed, placeholder: "If You don't know just type 'Other'" %>
     <%=f.input :color %>
     <%=f.input :size, collection: @size %>
     <%=f.input :name %>
@@ -12,14 +17,14 @@
     <%=f.input :last_seen_at %>
     <div class="form-inline">
       <%=f.input :last_seen_date, as: :date, order: [:day, :month, :year] %>
-      <%=f.input :last_seen_time, as: :time %>
+      <%=f.input :last_seen_time, as: :time, only: [:hour, :minute] %>
     </div>
   </div>
   <div class="col-md-6">
     <div>
       <%= f.file_field :image, multiple: :true %>
     </div>
-    <%=f.input :note %>
+    <%=f.input :note, placeholder: 'Use this place to leave some contact number or add any other information that help to find your pet.' %>
   </div>
   <%= f.submit btn_label %>
 <%end%>

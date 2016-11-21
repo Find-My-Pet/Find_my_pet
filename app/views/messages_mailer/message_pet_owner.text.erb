@@ -1,0 +1,6 @@
+Hello <%= @user.first_name %>,
+You got a message about your missing pet <%= @pet.name %>
+<%= @message.body %>
+<%= link_to 'Click here to view the message for you', pet_url(@pet) %>
+Regards,
+Find My Pet Team

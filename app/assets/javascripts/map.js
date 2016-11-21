@@ -139,7 +139,7 @@ function initMap() {
             addMarker(pos, map);
             // getCloseLostPets();
             $('#pet_last_seen_at').val(`(${pos.lat}, ${pos.lng})`)
-            $('#sighting_last_seen_at').val(`(${pos.lat}, ${pos.lng})`);
+            $('#sighting_last_seen_at').val(`(${pos.lat}, ${pos.lng})`)
           }, function() {
             handleLocationError(true, infoWindow, map.getCenter());
           });

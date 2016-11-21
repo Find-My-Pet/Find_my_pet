@@ -18,6 +18,8 @@ gender = ['Male', 'Female']
            gender: gender.sample,
            age:  (1+Random.rand(10)),
            last_seen_at: Faker::Address.city,
+           last_seen_date: Faker::Date.forward(30),
+           last_seen_time: Faker::Time.backward(30, :all),
            note: Faker::Lorem.paragraph,
            lat: rand(49.24...49.28),
            long: rand(-123.13...-123.11),

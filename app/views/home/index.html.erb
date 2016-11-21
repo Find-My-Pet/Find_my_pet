@@ -7,18 +7,22 @@
       <div class="container">
         <div class="row">
           <div class="col-md-5 col-md-offset-1">
-            <div class="panel">
-              <h2><strong>Spotted </strong>a Pet</h2>
+            <a href="#" class="panel">
+              <h2><strong>Spotted </strong>a Pet?</h2>
               <img src="/assets/panel-image-1.png" alt="" />
-
-            </div>
+            </a>
 
           </div>
 
           <div class="col-md-5">
-            <a href="#" class="panel">
-              <h2><strong>Spotted </strong>a Pet</h2>
-              <img src="/assets/panel-image-1.png" alt="" />
+
+          <% if user_signed_in? %>
+            <a href="<%= new_pet_path %>" class="panel lostpet">
+          <% else %>
+            <a data-toggle="modal" data-target="#SignIn" class="panel lostpet">
+          <% end %>
+              <h2><strong>Lost </strong>a Pet?</h2>
+              <img src="/assets/panel-image-2.png" alt="" />
             </a>
           </div>
         </div>
@@ -53,53 +57,6 @@
   </div>
 </div>
 
-
-
-
-
-<div class="container">
-
-  <!-- Trigger the modal with a button -->
-  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#SignUp">Sign Up</button>
-
-  <!-- Modal -->
-  <div class="modal fade" id="SignUp" role="dialog">
-    <div class="modal-dialog">
-
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Sign Up</h4>
-        </div>
-        <div class="modal-body">
-        <% unless user_signed_in? %>
-            <%= button_to 'Sign In With Facebook', sign_in_with_facebook_path, method: :get %>
-            <p>or</p>
-            <%= button_to 'Sign In With Twitter', sign_in_with_twitter_path, method: :get %>
-            <p>Or with Email</p>
-            <%= simple_form_for User.new do |f| %>
-                <%= f.input :first_name %>
-                <%= f.input :last_name %>
-                <%= f.input :email %>
-                <%= f.input :password %>
-                <%= f.submit %>
-            <% end %>
-        <% end %>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-</div>
-
-
-
-
 <div class="container">
   <div class="col-md-6">
     <div class="panel panel-default list_panel">
@@ -130,3 +87,5 @@
   </div>
 
 </div>
+
+<%= render 'shared/sign_in' %>

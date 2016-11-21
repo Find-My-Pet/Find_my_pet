@@ -10,7 +10,9 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to home_path, notice: 'Thanks for signing up'
     else
+      flash.now[:alert] = 'Please make sure all fields are filled in'
       render :new
+
     end
   end
 
@@ -18,5 +20,9 @@ class UsersController < ApplicationController
   end
 
   def update
+  end
+
+  def index
+    @user = current_user
   end
 end
