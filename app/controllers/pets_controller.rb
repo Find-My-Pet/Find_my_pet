@@ -42,10 +42,12 @@ class PetsController < ApplicationController
           config.access_token_secret = current_user.oauth_secret
         end
         client.update(social_message)
+        flash[:notice] = 'Tweet sent'
       elsif @pet.share_on_facebook
         @pet.share_on_facebook = false
         @graph = Koala::Facebook::API.new(current_user.oauth_token)
         @graph.put_connections("me", "feed", message: social_message)
+        flash[:notice] = 'Posted on Facebook'
       end
       redirect_to pet_path(@pet)
     else
@@ -111,6 +113,6 @@ class PetsController < ApplicationController
   end
 
   def social_message
-    "#{(@pet.found ? 'Found my pet' : 'Please help find my pet')} #{@pet.name}, it's a #{@pet.color} #{@pet.pet_type}, #{@pet.breed}, #{@pet.gender}, age #{@pet.age}. #FindMyPet"
+    "#{(@pet.found ? 'Found my pet' : 'Please help find my pet')} #{@pet.name}, it's a #{@pet.color} #{@pet.pet_type}, #{@pet.breed}, #{@pet.gender}, age #{@pet.age}. #FindMyPet".slice(0...140)
   end
 end
