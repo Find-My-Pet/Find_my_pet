@@ -24,6 +24,21 @@ $( document ).ready(function() {
   map.mapTypes.set("map_style", styledMap);
   map.setMapTypeId("map_style");
   window.globals = {};
+
+  globals.heatmap = new google.maps.visualization.HeatmapLayer({
+    radius: 15
+  });
+  // Get all the lost pets
+  getLostPets();
+  // get sightings by pet id
+  getSightingsOfaPet(4);
+
+
+  $('#filter_button').on('click', function(){
+    filterPetsByType(globals.pets, "Dog");
+  });
+
+
 });
 
 function initMap() {
@@ -42,6 +57,16 @@ function initMap() {
   });
 
   // var infoWindow = new google.maps.InfoWindow({map: map});
+
+  // ##### TO BE ADDED TO 'PET DIVS' TO GET SIGHTINGS FOR HEATMAP ###########
+  // google.maps.event.addDomListener(getSightings, 'click', function() {
+  // globals.heatmap.setMap(null);
+  // getSightingsOfaPet('-THE-PET-ID-', globals.heatmap);
+  //});
+
+
+  var infoWindow = new google.maps.InfoWindow({map: map});
+
   // Create the search box and link it to the UI element.
   var input = document.getElementById('pac-input');
   var searchBox = new google.maps.places.SearchBox(input);
@@ -202,11 +227,11 @@ function addSightingsMarker(data, map) {
                 weight: 20
               });
   }
-  var heatmap = new google.maps.visualization.HeatmapLayer({
+  globals.heatmap = new google.maps.visualization.HeatmapLayer({
     data: heatmapData,
     radius: 15
   });
-  heatmap.setMap(map);
+  globals.heatmap.setMap(map);
 
 }
 
@@ -274,13 +299,13 @@ var getSightingsOfaPet = function(pet_id){
     type: "get", //send it through get method
     data:{id: pet_id},
     success: function(data) {
-      window.globals.sightings = data;
-      console.log(globals.sightings);
+      window.globals.sightings = data;``
       addSightingsMarker(data, map);
     },
     error: function(xhr) {
       alert('No data');
     }
+
   });
 }
 
