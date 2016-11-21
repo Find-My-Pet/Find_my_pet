@@ -59,6 +59,21 @@ table {
   }
 }
 
+.sub-header {
+  padding: 9px;
+  background: gainsboro;
+  margin-bottom: 30px;
+  @include gradient(#00AEFC, #A0C7E1);
+  h1{
+    font-size: 60px;
+
+  }
+  p{
+    color: rgba(#f2f2f2, 0.5);
+    font-size: 40px;
+  }
+}
+
 .hr{
   border-bottom: solid 2px lighten($btn-default-color, 70%);
   display:block;
