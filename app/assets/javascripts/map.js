@@ -114,7 +114,6 @@ function initMap() {
              title: place.name,
              position: place.geometry.location
            }));
-
            if (place.geometry.viewport) {
              // Only geocodes have viewport.
              bounds.union(place.geometry.viewport);
@@ -213,7 +212,8 @@ function addLostPetsMarker(location, map, label) {
   var marker = new google.maps.Marker({
     position: location,
     label: label,
-    map: map
+    map: map,
+    icon: 'assets/icon_report_lost_red.png'
   });
   markers.push(marker);
 }
