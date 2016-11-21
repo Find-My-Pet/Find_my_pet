@@ -1,6 +1,7 @@
 <%= simple_form_for @sighting do |f| %>
 <div class="col-md-6">
    <%= f.input :pet_type, collection: @pet_type %>
+   <%= f.hidden_field :pet_id %>
    <br>
    <%= f.file_field :image %>
    <%=f.input :note %>
