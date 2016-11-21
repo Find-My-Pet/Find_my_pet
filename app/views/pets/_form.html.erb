@@ -25,6 +25,7 @@
     <div class="col-md-8 ">
       <div>
         <%= f.file_field :image, multiple: :true %>
+        <%= f.hidden_field :image_cache %>
       </div>
       <%=f.input :note, placeholder: 'Use this place to leave some contact number or add any other information that help to find your pet.' %>
 
