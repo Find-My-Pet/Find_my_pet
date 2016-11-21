@@ -10,21 +10,8 @@
       </div>
       <div class="modal-body">
       <% unless user_signed_in? %>
-          <%= button_to 'Sign Up With Facebook', sign_in_with_facebook_path, method: :get %>
-          <p>or</p>
-          <%= button_to 'Sign Up With Twitter', sign_in_with_twitter_path, method: :get %>
-          <p>Or with Email</p>
-          <%= simple_form_for User.new do |f| %>
-              <%= f.input :first_name %>
-              <%= f.input :last_name %>
-              <%= f.input :email %>
-              <%= f.input :password %>
-              <%= f.submit %>
-          <% end %>
-      <% end %>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <%= render partial: "shared/basic_sign_up" %>
+        <% end %>
       </div>
     </div>
 

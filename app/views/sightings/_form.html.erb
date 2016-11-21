@@ -6,6 +6,7 @@
   <div class="pet-other" style="display: none;">
     <%=f.input :pet_type, placeholder: 'Please type the specie of your pet', label: 'Specie' %>
   </div>
+   <%= f.hidden_field :pet_id %>
    <%=f.input :note %>
    <%=f.input :last_seen_at %>
  <div class="form-inline">

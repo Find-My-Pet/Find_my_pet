@@ -31,7 +31,7 @@
       </a>
     </div>
       <!-- <div class="navbar-collapse collapse" id="petfinder-navbar">
-      Id must be nav of the boorstrap mobile nav doesn't work  -->
+      Id must be nav of the bootstrap mobile nav doesn't work  -->
       <div id="navbar" class="navbar-collapse collapse" >
         <ul class="nav navbar-nav navbar-right">
           <li><%= link_to 'Report a Lost Pet', new_pet_path %></li>
@@ -59,8 +59,17 @@
     </div>
   </nav>
 
+<% if flash[:alert].present? %>
+  <div class="alert alert-danger">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
 
-
+<% if flash[:notice].present? %>
+  <div class="alert alert-success">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
     <%= yield %>
 
 <%= render 'shared/sign_up' %>
