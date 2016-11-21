@@ -91,5 +91,32 @@
 <%= render 'shared/sign_up' %>
 <%= render 'shared/sign_in' %>
 
+  <div class="footer">
+    <div class="container">
+      <div class="col-md-4">
+        <ul>
+          <li><%= link_to 'Lost Your Pet?', new_pet_path %></li>
+          <li><%= link_to 'All Lost Pets', pets_path %></li>
+
+        </ul>
+
+      </div>
+      <div class="col-md-4">
+        <ul>
+        <li><%= link_to 'Spotted a pet?', new_sighting_path %></li>
+        <li><%= link_to 'All Spotted Pets', sightings_path %></li>
+          </ul>
+      </div>
+      <div class="col-md-4">
+        <a class="navbar-brand" href="<%= home_path %>">
+            <%= image_tag "logo-main.png", class: "logo-nav" %>
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
   </body>
 </html>
