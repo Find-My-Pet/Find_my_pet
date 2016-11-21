@@ -25,13 +25,12 @@ $( document ).ready(function() {
   map.setMapTypeId("map_style");
   window.globals = {};
   // Get all the lost pets
-  getLostPets();
+  // getLostPets();
   // get sightings by pet id
   getSightingsOfaPet(4);
   
  $('#filter_button').on('click', function(){
   var pets = getPetsByType(globals.pets, "Dog", map);
-  
  });
 
 });
@@ -115,10 +114,12 @@ function initMap() {
               lat: position.coords.latitude,
               lng: position.coords.longitude
             };
+            window.globals.location = pos;
             // infoWindow.setPosition(pos);
             // infoWindow.setContent('Location found.');
             map.setCenter(pos);
             addMarker(pos, map);
+            getCloseLostPets();
             $('#pet_last_seen_at').val(`(${pos.lat}, ${pos.lng})`)
           }, function() {
             handleLocationError(true, infoWindow, map.getCenter());
@@ -238,6 +239,19 @@ var getLostPets = function(){
   });
 }
 
+var getCloseLostPets = function(){
+  // Get all the lost pets and draw markers on the map
+  $.get('/api/v1/pets',
+    {user_lat: globals.location.lat, user_lng: globals.location.lng},
+    (data) => {
+    window.globals.pets = data;
+    console.log(data)
+    for (var i=0; i < data.length; i++){
+      addLostPetsMarker({lat:data[i].lat, lng: data[i].lng}, map, data[i].name);
+    }
+  });
+}
+
 // Get all the sightings by pet id
 var getSightingsOfaPet = function(pet_id){
   // Get all the lost pets and draw markers on the map
@@ -259,7 +273,7 @@ var getSightingsOfaPet = function(pet_id){
 // Returns the pets with the category given
 // example:   
 //  $('#filter_button').on('click', function(){
-//   var pets = getPetsByType(globals.pets, "Dog");
+//   var pets = getPetsByType(globals.pets, "Dog", map);
 //  });
 function getPetsByType(pets_data, type, map) {
   var pets = pets_data;
@@ -267,3 +281,5 @@ function getPetsByType(pets_data, type, map) {
       function(data){ return pets.pet_type == type }
   );
 }
+
+
