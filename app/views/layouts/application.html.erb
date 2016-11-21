@@ -34,10 +34,10 @@
       Id must be nav of the bootstrap mobile nav doesn't work  -->
       <div id="navbar" class="navbar-collapse collapse" >
         <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to 'Report a Lost Pet', new_pet_path %></li>
-          <li><%= link_to 'Pets Spotted', sightings_path %></li>
-          <li><%= link_to 'Report a Pet Sighting', new_sighting_path %></li>
-          <li><%= link_to 'Missing Pet Reports', pets_path %></li>
+          <li><%= link_to 'Lost Your Pet?', new_pet_path %></li>
+          <li><%= link_to 'All Lost Pets', pets_path %></li>
+          <li><%= link_to 'Spotted a pet?', new_sighting_path %></li>
+          <li><%= link_to 'All Spotted Pets', sightings_path %></li>
           <% unless user_signed_in? %>
             <li> <a class="btn btn-primary" data-toggle="modal" data-target="#SignUp">Sign Up</a></li>
             <li> <a class="btn btn-primary" data-toggle="modal" data-target="#SignIn">Sign In</a></li>
