@@ -1,4 +1,6 @@
 class Pet < ApplicationRecord
+  attr_accessor :tweet_this
+  attr_accessor :share_on_facebook
   belongs_to :user
 
   validates :pet_type, presence: true
@@ -10,7 +12,7 @@ class Pet < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_many :sightings, dependent: :destroy
 
-  
+
   mount_uploaders :image, ImageUploader
 
 end
