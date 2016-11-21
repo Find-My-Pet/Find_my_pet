@@ -78,7 +78,7 @@ var getLostPets = function(){
         <% if p.image.present?%>
           <%= image_tag p.image[0].url(:large), class: 'image-index image-circle'%>
         <%else%>
-         <img src="assets/image_dog_03@2x.png" alt="" />
+         <%=image_tag asset_path("image_dog_03@2x.png") %>
 
         <%end%>
         <div class="caption">

@@ -23,6 +23,7 @@
 
 
                     <div class="col-md-4 text-right">
+                        <%= link_to "Create a Street Poster", pet_print_path(@pet), class:'btn btn-default' %>
                         <%=link_to edit_pet_path(@pet), class:'btn btn-default' do%>
                             <span class="glyphicon glyphicon-pencil "></span>
                         <%end%>
@@ -119,6 +120,45 @@
                 </div>
             </div>
         </div>
+
+
+
+        <div class="col-md-4 text-right">
+          <%= link_to "Create a Street Poster", pet_print_path(@pet), class:'btn btn-default' %>
+          <%=link_to edit_pet_path(@pet), class:'btn btn-default' do%>
+            <span class="glyphicon glyphicon-pencil "></span>
+          <%end%>
+          <%=link_to pet_path(@pet), class:'btn btn-default', method: :delete do %>
+            <span class="glyphicon glyphicon-trash"></span>
+          <%end%>
+        </div>
+      </div>
+      <div class="hr"></div>
+
+
+    <div class="col-md-6">
+      <p><span> Last seen : </span><%= @pet.last_seen_at %></p>
+      <p><%= @pet.last_seen_date.strftime('%b %d %Y') %>
+      <%= @pet.last_seen_time.strftime('%I:%M %p') %></p>
+      <p><%= @pet.note %></p>
+      <div>
+          <p class="btn btn-default">Found Your pet?</p>
+          <p>
+              <% check_state = @pet.found ? 'checked' : 'unchecked' %>
+              <%= simple_form_for @pet do |f| %>
+                  <%= f.input :found, as: :boolean, :input_html => { :checked => check_state } %>
+                  <% if user_signed_in? && current_user.signed_in_with_twitter? %>
+                      <%= f.input :tweet_this, as: :boolean, :input_html => { :checked => 'unchecked' } %>
+                  <% end %>
+                      <%= f.input :share_on_facebook, as: :boolean, :input_html => { :checked => 'unchecked' } %>
+                  <% if user_signed_in? && current_user.signed_in_with_facebook? %>
+                      <%= f.input :share_on_facebook, as: :boolean, :input_html => { :checked => 'unchecked' } %>
+                  <% end %>
+                  <%= f.submit 'Confirm' %>
+              <% end %>
+          </p>
+
+      </div>
 
 
     </div>
